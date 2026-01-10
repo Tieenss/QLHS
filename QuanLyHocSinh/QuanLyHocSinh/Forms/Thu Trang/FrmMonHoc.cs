@@ -15,7 +15,7 @@ namespace QuanLyHocSinh
     public partial class FrmMonHoc : Form
     {
         #region Variables
-        string connectionString = @"Data Source= TRANG\MSSQLSERVER2025;Initial Catalog=QuanLyHocSinh;" +
+        string connectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;" +
             "TrustServerCertificate = True; Trusted_Connection = True";
         DataSet dsMonHoc = new DataSet();
         string Status = "Reset";

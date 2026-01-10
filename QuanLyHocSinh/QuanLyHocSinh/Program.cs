@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BaiKTcuoiky;
 using QuanLyHocSinh.Forms;
+
 
 namespace QuanLyHocSinh
 {
@@ -15,7 +17,7 @@ namespace QuanLyHocSinh
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmPhonghoc());
+            Application.Run(new FrmQuanlyThongbao());
         }
     }
 }

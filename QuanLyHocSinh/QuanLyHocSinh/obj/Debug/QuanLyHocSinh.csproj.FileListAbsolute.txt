@@ -197,3 +197,6 @@ D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.pd
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmMonHoc.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmPhonghoc.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmTKB.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyHocphi.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyPhuckhao.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyThongbao.resources
