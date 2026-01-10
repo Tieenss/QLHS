@@ -95,7 +95,7 @@ namespace QuanLyHocSinh
             }
             else if (Status == "Edit")
             {
-                txtMa.Enabled = true;
+                txtMa.Enabled = false;
                 txtTen.Enabled = true;
                 txtTim.Enabled = true;
 
