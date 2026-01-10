@@ -194,3 +194,6 @@ D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.cs
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHo.CFAE9C16.Up2Date
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.exe
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.pdb
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmMonHoc.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmPhonghoc.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.FrmTKB.resources

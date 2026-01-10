@@ -167,31 +167,58 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Database\ExcelHelper.cs" />
-    <Compile Include="Forms\FrmLichThi.cs">
+    <Compile Include="Forms\Tiến\FrmLichThi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmLichThi.Designer.cs">
+    <Compile Include="Forms\Tiến\FrmLichThi.Designer.cs">
       <DependentUpon>FrmLichThi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmQuanLyDiem.cs">
+    <Compile Include="Forms\Thu Trang\FrmMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmQuanLyDiem.Designer.cs">
+    <Compile Include="Forms\Thu Trang\FrmMonHoc.Designer.cs">
+      <DependentUpon>FrmMonHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Thu Trang\FrmPhonghoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Thu Trang\FrmPhonghoc.Designer.cs">
+      <DependentUpon>FrmPhonghoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tiến\FrmQuanLyDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tiến\FrmQuanLyDiem.Designer.cs">
       <DependentUpon>FrmQuanLyDiem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmQuanLyHanhKiem.cs">
+    <Compile Include="Forms\Tiến\FrmQuanLyHanhKiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmQuanLyHanhKiem.Designer.cs">
+    <Compile Include="Forms\Tiến\FrmQuanLyHanhKiem.Designer.cs">
       <DependentUpon>FrmQuanLyHanhKiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Thu Trang\FrmTKB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Thu Trang\FrmTKB.Designer.cs">
+      <DependentUpon>FrmTKB.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\FrmLichThi.resx">
+    <EmbeddedResource Include="Forms\Tiến\FrmLichThi.resx">
       <DependentUpon>FrmLichThi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmQuanLyDiem.resx">
+    <EmbeddedResource Include="Forms\Thu Trang\FrmMonHoc.resx">
+      <DependentUpon>FrmMonHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Thu Trang\FrmPhonghoc.resx">
+      <DependentUpon>FrmPhonghoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tiến\FrmQuanLyDiem.resx">
       <DependentUpon>FrmQuanLyDiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Thu Trang\FrmTKB.resx">
+      <DependentUpon>FrmTKB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -216,9 +243,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
