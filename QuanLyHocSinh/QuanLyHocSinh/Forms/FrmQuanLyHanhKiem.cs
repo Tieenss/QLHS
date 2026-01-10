@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using QuanLyHocSinh.Database; // Gọi class kết nối CSDL
+using QuanLyHocSinh.Database;
 
 namespace QuanLyHocSinh.Forms
 {
@@ -12,186 +12,137 @@ namespace QuanLyHocSinh.Forms
             InitializeComponent();
         }
 
-        // 1. SỰ KIỆN LOAD FORM
-        private void QuanLyHanhKiem_Load(object sender, EventArgs e)
+        private void FrmQuanLyHanhKiem_Load(object sender, EventArgs e)
         {
-            LoadComboBox(); // Tạo dữ liệu cho các ô chọn
-            LoadData();     // Load toàn bộ danh sách lên
-
-            // Cấu hình giao diện
-            txtMaHS.ReadOnly = true;  // Không cho sửa Mã HS ở ô cập nhật
-            txtTenHS.ReadOnly = true; // Không cho sửa Tên HS
-
-            // Mặc định năm học hiện tại (Hardcode tạm hoặc lấy DateTime.Now.Year)
-            txtNamHoc.Text = "2024-2025";
-        }
-
-        // 2. HÀM LOAD DỮ LIỆU TỪ SQL
-        void LoadData(string query = "")
-        {
-            try
+            LoadData();
+            // Cài đặt combo box nếu chưa có item
+            if (cboXepLoai.Items.Count == 0)
             {
-                if (string.IsNullOrEmpty(query))
-                {
-                    // JOIN bảng HanhKiem và HocSinh để lấy Tên HS
-                    // Cần đảm bảo tên bảng và tên cột khớp với SQL của bạn
-                    query = "SELECT hk.MaHS, hs.HoTen, hk.NamHoc, hk.HocKy, hk.XepLoai, hk.NhanXet " +
-                            "FROM HanhKiem hk JOIN HocSinh hs ON hk.MaHS = hs.MaHS";
-                }
-
-                DataTable dt = DatabaseHelper.GetData(query);
-                dgvHanhKiem.DataSource = dt;
-
-                // Đặt tiêu đề cột tiếng Việt
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    dgvHanhKiem.Columns["MaHS"].HeaderText = "Mã HS";
-                    dgvHanhKiem.Columns["HoTen"].HeaderText = "Họ Tên";
-                    dgvHanhKiem.Columns["NamHoc"].HeaderText = "Năm Học";
-                    dgvHanhKiem.Columns["HocKy"].HeaderText = "Học Kỳ";
-                    dgvHanhKiem.Columns["XepLoai"].HeaderText = "Xếp Loại";
-                    dgvHanhKiem.Columns["NhanXet"].HeaderText = "Nhận Xét";
-
-                    // Chỉnh độ rộng cột Nhận xét cho thoải mái
-                    dgvHanhKiem.Columns["NhanXet"].Width = 200;
-                    dgvHanhKiem.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+                cboXepLoai.Items.AddRange(new string[] { "Tốt", "Khá", "Trung Bình", "Yếu", "Chưa xếp loại" });
             }
         }
 
-        // 3. TẠO DỮ LIỆU CHO COMBOBOX
-        void LoadComboBox()
+        // --- LOAD DỮ LIỆU ---
+        private void LoadData(string whereClause = "")
         {
-            // Combo Học Kỳ cho Lọc
-            cboLocHocKy.Items.Clear();
-            cboLocHocKy.Items.Add("1");
-            cboLocHocKy.Items.Add("2");
-            cboLocHocKy.SelectedIndex = 0;
+            // SỬA: Dùng đúng tên cột XepLoai và NhanXet
+            string sql = @"SELECT hk.MaHS, hs.HoTen, hk.HocKy, hk.NamHoc, hk.XepLoai, hk.NhanXet 
+                           FROM HanhKiem hk
+                           JOIN HocSinh hs ON hk.MaHS = hs.MaHS
+                           WHERE 1=1 " + whereClause;
 
-            // Combo Xếp Loại cho phần Cập Nhật
-            cboXepLoai.Items.Clear();
-            cboXepLoai.Items.Add("Tốt");
-            cboXepLoai.Items.Add("Khá");
-            cboXepLoai.Items.Add("Trung Bình");
-            cboXepLoai.Items.Add("Yếu");
-            cboXepLoai.SelectedIndex = 0; // Mặc định chọn Tốt
+            DataTable dt = DatabaseHelper.GetData(sql);
+            dgvHanhKiem.DataSource = dt;
         }
 
-        // 4. BINDING DỮ LIỆU KHI CLICK VÀO BẢNG
+        // --- CLICK VÀO LƯỚI ---
         private void dgvHanhKiem_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex == -1 || e.RowIndex >= dgvHanhKiem.Rows.Count - 1) return;
+
+            try
             {
                 DataGridViewRow row = dgvHanhKiem.Rows[e.RowIndex];
 
-                txtMaHS.Text = row.Cells["MaHS"].Value?.ToString();
-                txtTenHS.Text = row.Cells["HoTen"].Value?.ToString();
-                txtNamHoc.Text = row.Cells["NamHoc"].Value?.ToString();
+                txtMaHS.Text = GetString(row, "MaHS");
+                txtTenHS.Text = GetString(row, "HoTen");
+                txtNamHoc.Text = GetString(row, "NamHoc");
 
-                // Gán giá trị vào ComboBox (Nếu giá trị trong bảng khớp với Items)
-                string xepLoai = row.Cells["XepLoai"].Value?.ToString();
-                if (cboXepLoai.Items.Contains(xepLoai))
-                {
-                    cboXepLoai.Text = xepLoai;
-                }
+                // SỬA: Lấy dữ liệu từ cột NhanXet và XepLoai
+                txtNhanXet.Text = GetString(row, "NhanXet");
 
-                txtNhanXet.Text = row.Cells["NhanXet"].Value?.ToString();
-            }
-        }
+                string hocKy = GetString(row, "HocKy");
+                string xepLoai = GetString(row, "XepLoai");
 
-        // 5. NÚT LỌC DANH SÁCH
-        private void btnLoc_Click(object sender, EventArgs e)
-        {
-            string lop = txtLocMaLop.Text.Trim();
-            string nam = txtNamHoc.Text.Trim();
-            string hk = cboLocHocKy.Text;
-
-            string sql = "SELECT hk.MaHS, hs.HoTen, hk.NamHoc, hk.HocKy, hk.XepLoai, hk.NhanXet " +
-                         "FROM HanhKiem hk JOIN HocSinh hs ON hk.MaHS = hs.MaHS " +
-                         $"WHERE hk.NamHoc = '{nam}' AND hk.HocKy = '{hk}'";
-
-            if (!string.IsNullOrEmpty(lop))
-            {
-                sql += $" AND hs.MaLop LIKE '%{lop}%'";
-            }
-
-            LoadData(sql);
-        }
-
-        // 6. NÚT TÌM KIẾM
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            string kw = txtTimKiem.Text.Trim();
-            string sql = "SELECT hk.MaHS, hs.HoTen, hk.NamHoc, hk.HocKy, hk.XepLoai, hk.NhanXet " +
-                         "FROM HanhKiem hk JOIN HocSinh hs ON hk.MaHS = hs.MaHS " +
-                         $"WHERE hk.MaHS LIKE '%{kw}%' OR hs.HoTen LIKE N'%{kw}%'";
-            LoadData(sql);
-        }
-
-        // 7. NÚT LƯU / CẬP NHẬT
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMaHS.Text)) return;
-
-            try
-            {
-                string maHS = txtMaHS.Text;
-                string nam = txtNamHoc.Text; // Lấy năm từ ô lọc hoặc ô binding
-                // Giả sử ta lấy Học kỳ từ ô Lọc (vì trong form cập nhật không có ô chọn học kỳ)
-                string hk = cboLocHocKy.Text;
-
-                string xepLoai = cboXepLoai.Text;
-                string nhanXet = txtNhanXet.Text;
-
-                // SQL Update (Lưu ý có chữ N trước chuỗi tiếng Việt)
-                string sql = $"UPDATE HanhKiem SET XepLoai=N'{xepLoai}', NhanXet=N'{nhanXet}' " +
-                             $"WHERE MaHS='{maHS}' AND NamHoc='{nam}' AND HocKy='{hk}'";
-
-                DatabaseHelper.ExecuteSql(sql);
-
-                MessageBox.Show("Cập nhật hạnh kiểm thành công!");
-                LoadData(); // Load lại để thấy thay đổi
+                if (!string.IsNullOrEmpty(hocKy)) cboHocKy.Text = hocKy;
+                if (!string.IsNullOrEmpty(xepLoai)) cboXepLoai.Text = xepLoai;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi cập nhật: " + ex.Message);
+                MessageBox.Show("Lỗi hiển thị: " + ex.Message);
             }
         }
 
-        // 8. NÚT XÓA (Xóa đánh giá hạnh kiểm, đưa về chưa xếp loại hoặc xóa hẳn dòng)
+        private string GetString(DataGridViewRow row, string colName)
+        {
+            if (row.Cells[colName].Value != null && row.Cells[colName].Value != DBNull.Value)
+                return row.Cells[colName].Value.ToString();
+            return "";
+        }
+
+        // --- THÊM ---
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaHS.Text)) { MessageBox.Show("Vui lòng nhập Mã HS"); return; }
+
+            // SỬA: Insert vào cột XepLoai, NhanXet
+            string sql = string.Format(@"INSERT INTO HanhKiem (MaHS, HocKy, NamHoc, XepLoai, NhanXet) 
+                                         VALUES ('{0}', N'{1}', '{2}', N'{3}', N'{4}')",
+                                         txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text, cboXepLoai.Text, txtNhanXet.Text);
+
+            DatabaseHelper.ExecuteSql(sql);
+            LoadData();
+            ResetControls();
+        }
+
+        // --- SỬA ---
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaHS.Text)) return;
+
+            // SỬA: Update cột XepLoai, NhanXet
+            string sql = string.Format(@"UPDATE HanhKiem 
+                                         SET XepLoai = N'{0}', NhanXet = N'{1}'
+                                         WHERE MaHS = '{2}' AND HocKy = N'{3}' AND NamHoc = '{4}'",
+                                         cboXepLoai.Text, txtNhanXet.Text,
+                                         txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text);
+
+            DatabaseHelper.ExecuteSql(sql);
+            MessageBox.Show("Cập nhật thành công!");
+            LoadData();
+        }
+
+        // --- XÓA ---
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMaHS.Text)) return;
 
-            if (MessageBox.Show("Xóa đánh giá hạnh kiểm của HS này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                // Ở đây tôi chọn phương án Update về rỗng thay vì Delete hẳn dòng (tùy nghiệp vụ)
-                string sql = $"UPDATE HanhKiem SET XepLoai='', NhanXet='' " +
-                             $"WHERE MaHS='{txtMaHS.Text}' AND NamHoc='{txtNamHoc.Text}' AND HocKy='{cboLocHocKy.Text}'";
+                string sql = string.Format("DELETE FROM HanhKiem WHERE MaHS = '{0}' AND HocKy = N'{1}' AND NamHoc = '{2}'",
+                                            txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text);
 
                 DatabaseHelper.ExecuteSql(sql);
                 LoadData();
+                ResetControls();
             }
         }
 
-        // 9. NÚT LÀM MỚI FORM
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string keyword = txtTimKiem.Text.Trim();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                LoadData(string.Format(" AND (hk.MaHS LIKE '%{0}%' OR hs.HoTen LIKE N'%{0}%')", keyword));
+            }
+            else LoadData();
+        }
+
         private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ResetControls();
+            LoadData();
+        }
+
+        private void ResetControls()
         {
             txtMaHS.Clear();
             txtTenHS.Clear();
+            txtNamHoc.Clear();
             txtNhanXet.Clear();
-            cboXepLoai.SelectedIndex = 0;
-            LoadData(); // Load lại bảng gốc
-        }
-
-        private void btnXuatExcel_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("Chức năng đang phát triển");
-            ExcelHelper.ExportToExcel(dgvHanhKiem, "DanhSachHanhKiem");
+            txtTimKiem.Clear();
+            cboXepLoai.SelectedIndex = -1;
+            cboHocKy.SelectedIndex = -1;
         }
     }
 }

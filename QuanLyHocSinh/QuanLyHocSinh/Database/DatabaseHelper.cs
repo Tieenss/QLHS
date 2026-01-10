@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient; // Nếu báo lỗi dòng này thì cài NuGet System.Data.SqlClient
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace QuanLyHocSinh.Database
 {
     public class DatabaseHelper
     {
-        // CẤU HÌNH KẾT NỐI (Dành cho bản SQL Server Express)
-        // Lưu ý: Thay '123456' bằng mật khẩu tài khoản sa của bạn
+        // CẤU HÌNH KẾT NỐI 
+        // Lưu ý: Đảm bảo SQL Server của bạn cho phép đăng nhập bằng tài khoản sa
         private static string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;User ID=sa;Password=123456";
 
-        // Hàm lấy dữ liệu (SELECT)
+        // Hàm lấy dữ liệu (SELECT) -> Trả về DataTable
         public static DataTable GetData(string query)
         {
             DataTable dt = new DataTable();
@@ -33,7 +33,7 @@ namespace QuanLyHocSinh.Database
             return dt;
         }
 
-        // Hàm thực thi lệnh (INSERT, UPDATE, DELETE)
+        // Hàm thực thi lệnh (INSERT, UPDATE, DELETE) -> Không trả về dữ liệu
         public static void ExecuteSql(string sql)
         {
             try
