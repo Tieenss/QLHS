@@ -7,14 +7,17 @@ namespace QuanLyHocSinh.Forms
 {
     public partial class FrmLichThi : Form
     {
+        #region Variables
         public FrmLichThi()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Public functions
         private void FrmLichThi_Load(object sender, EventArgs e)
         {
-            LoadData(); // Load dữ liệu khi mở form
+            LoadData(); 
         }
 
         // --- HÀM DÙNG CHUNG ---
@@ -31,7 +34,9 @@ namespace QuanLyHocSinh.Forms
             dgvLichThi.DataSource = dt;
             lblTotal.Text = "Tổng số bản ghi: " + (dt != null ? dt.Rows.Count.ToString() : "0");
         }
+        #endregion
 
+        #region Event
         private void ClearInputs()
         {
             txtMaLT.Text = "";
@@ -53,7 +58,7 @@ namespace QuanLyHocSinh.Forms
                 DataGridViewRow row = dgvLichThi.Rows[e.RowIndex];
 
                 txtMaLT.Text = row.Cells["colMaLT"].Value?.ToString();
-                cbKyThi.Text = row.Cells["colTenKyThi"].Value?.ToString(); // Gán Text cho ComboBox
+                cbKyThi.Text = row.Cells["colTenKyThi"].Value?.ToString(); 
                 txtMaMH.Text = row.Cells["colMaMH"].Value?.ToString();
 
                 if (DateTime.TryParse(row.Cells["colNgayThi"].Value?.ToString(), out DateTime d))
@@ -171,5 +176,6 @@ namespace QuanLyHocSinh.Forms
             txtSearch.Text = "";
             LoadData();
         }
+        #endregion
     }
 }

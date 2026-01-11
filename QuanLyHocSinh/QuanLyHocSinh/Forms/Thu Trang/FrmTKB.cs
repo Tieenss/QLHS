@@ -14,7 +14,7 @@ namespace QuanLyHocSinh
     public partial class FrmTKB : Form
     {
         #region Variables
-        string connectionString = @"Data Source= .\MSSQLSERVER2025;Initial Catalog=QuanLyHocSinh;" +
+        string connectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;" +
             "TrustServerCertificate = True; Trusted_Connection = True";
         DataSet dsTKB = new DataSet();
         string Status = "Reset";

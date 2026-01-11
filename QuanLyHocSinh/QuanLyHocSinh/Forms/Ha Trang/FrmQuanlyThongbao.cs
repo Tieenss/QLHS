@@ -14,7 +14,8 @@ namespace BaiKTcuoiky
     public partial class FrmQuanlyThongbao : Form
     {
         #region
-        string connectionString = "Data source = .\\SQLEXPRESS; Initial Catalog = QuanLyHocSinh; TrustServerCertificate=True;Integrated Security=True";
+        string connectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;" +
+            "TrustServerCertificate = True; Trusted_Connection = True";
         DataSet ds = new DataSet();
         string Status = "Reset";
         #endregion

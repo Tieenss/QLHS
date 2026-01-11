@@ -200,3 +200,11 @@ D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Fr
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyHocphi.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyPhuckhao.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\BaiKTcuoiky.FrmQuanlyThongbao.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\Baitaplon.Đại.frmQlydoituong.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\Baitaplon.Đại.frmQlyhocsinh.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\Baitaplon.Đại.frmQlytaikhoan.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\qlhocsinh.quanlylop.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmQuanLyGiaoVien.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmToBoMon.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.zMainForm.Form1.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmDangNhap.resources

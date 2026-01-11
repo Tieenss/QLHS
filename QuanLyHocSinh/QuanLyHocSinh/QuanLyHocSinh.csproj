@@ -167,6 +167,30 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Database\ExcelHelper.cs" />
+    <Compile Include="zMainForm\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zMainForm\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlydoituong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlydoituong.Designer.cs">
+      <DependentUpon>frmQlydoituong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlyhocsinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlyhocsinh.Designer.cs">
+      <DependentUpon>frmQlyhocsinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlytaikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Đại\frmQlytaikhoan.Designer.cs">
+      <DependentUpon>frmQlytaikhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Ha Trang\FrmQuanlyHocphi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,8 +245,44 @@
     <Compile Include="Forms\Thu Trang\FrmTKB.Designer.cs">
       <DependentUpon>FrmTKB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dat\FrmQuanLyGiaoVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dat\FrmQuanLyGiaoVien.Designer.cs">
+      <DependentUpon>FrmQuanLyGiaoVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dat\quanlylop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dat\quanlylop.Designer.cs">
+      <DependentUpon>quanlylop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dat\FrmToBoMon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dat\FrmToBoMon.Designer.cs">
+      <DependentUpon>FrmToBoMon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="zMainForm\FrmDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zMainForm\FrmDangNhap.Designer.cs">
+      <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="zMainForm\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Đại\frmQlydoituong.resx">
+      <DependentUpon>frmQlydoituong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Đại\frmQlyhocsinh.resx">
+      <DependentUpon>frmQlyhocsinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Đại\frmQlytaikhoan.resx">
+      <DependentUpon>frmQlytaikhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyHocphi.resx">
       <DependentUpon>FrmQuanlyHocphi.cs</DependentUpon>
     </EmbeddedResource>
@@ -247,6 +307,15 @@
     <EmbeddedResource Include="Forms\Thu Trang\FrmTKB.resx">
       <DependentUpon>FrmTKB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dat\FrmQuanLyGiaoVien.resx">
+      <DependentUpon>FrmQuanLyGiaoVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dat\quanlylop.resx">
+      <DependentUpon>quanlylop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dat\FrmToBoMon.resx">
+      <DependentUpon>FrmToBoMon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -256,6 +325,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="zMainForm\FrmDangNhap.resx">
+      <DependentUpon>FrmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
