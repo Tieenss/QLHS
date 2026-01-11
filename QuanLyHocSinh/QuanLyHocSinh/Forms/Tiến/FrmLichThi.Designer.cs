@@ -34,7 +34,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtMaMH = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtGioBatDau = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtMaPhong = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,13 +41,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtpNgayThi = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtGioKetThuc = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.dtpGioBatDau = new System.Windows.Forms.DateTimePicker();
+            this.dtpGioKetThuc = new System.Windows.Forms.DateTimePicker();
             this.grpSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichThi)).BeginInit();
             this.grpDetail.SuspendLayout();
@@ -189,12 +189,13 @@
             // 
             // grpDetail
             // 
+            this.grpDetail.Controls.Add(this.dtpGioKetThuc);
             this.grpDetail.Controls.Add(this.label1);
+            this.grpDetail.Controls.Add(this.dtpGioBatDau);
             this.grpDetail.Controls.Add(this.txtMaLT);
             this.grpDetail.Controls.Add(this.label3);
             this.grpDetail.Controls.Add(this.txtMaMH);
             this.grpDetail.Controls.Add(this.label5);
-            this.grpDetail.Controls.Add(this.txtGioBatDau);
             this.grpDetail.Controls.Add(this.label7);
             this.grpDetail.Controls.Add(this.txtMaPhong);
             this.grpDetail.Controls.Add(this.label2);
@@ -202,7 +203,6 @@
             this.grpDetail.Controls.Add(this.label4);
             this.grpDetail.Controls.Add(this.dtpNgayThi);
             this.grpDetail.Controls.Add(this.label6);
-            this.grpDetail.Controls.Add(this.txtGioKetThuc);
             this.grpDetail.Location = new System.Drawing.Point(12, 410);
             this.grpDetail.Name = "grpDetail";
             this.grpDetail.Size = new System.Drawing.Size(960, 147);
@@ -251,13 +251,6 @@
             this.label5.Size = new System.Drawing.Size(136, 16);
             this.label5.TabIndex = 4;
             this.label5.Text = "Giờ Bắt Đầu (HH:mm):";
-            // 
-            // txtGioBatDau
-            // 
-            this.txtGioBatDau.Location = new System.Drawing.Point(140, 82);
-            this.txtGioBatDau.Name = "txtGioBatDau";
-            this.txtGioBatDau.Size = new System.Drawing.Size(300, 23);
-            this.txtGioBatDau.TabIndex = 5;
             // 
             // label7
             // 
@@ -323,13 +316,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Giờ Kết Thúc (HH:mm):";
             // 
-            // txtGioKetThuc
-            // 
-            this.txtGioKetThuc.Location = new System.Drawing.Point(600, 82);
-            this.txtGioKetThuc.Name = "txtGioKetThuc";
-            this.txtGioKetThuc.Size = new System.Drawing.Size(340, 23);
-            this.txtGioKetThuc.TabIndex = 13;
-            // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(251, 563);
@@ -383,6 +369,28 @@
             this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 9;
             // 
+            // dtpGioBatDau
+            // 
+            this.dtpGioBatDau.CustomFormat = "HH:mm";
+            this.dtpGioBatDau.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpGioBatDau.Location = new System.Drawing.Point(140, 83);
+            this.dtpGioBatDau.Name = "dtpGioBatDau";
+            this.dtpGioBatDau.ShowUpDown = true;
+            this.dtpGioBatDau.Size = new System.Drawing.Size(298, 23);
+            this.dtpGioBatDau.TabIndex = 10;
+            this.dtpGioBatDau.Value = new System.DateTime(2026, 1, 11, 21, 50, 0, 0);
+            // 
+            // dtpGioKetThuc
+            // 
+            this.dtpGioKetThuc.CustomFormat = "HH:mm";
+            this.dtpGioKetThuc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpGioKetThuc.Location = new System.Drawing.Point(600, 81);
+            this.dtpGioKetThuc.Name = "dtpGioKetThuc";
+            this.dtpGioKetThuc.ShowUpDown = true;
+            this.dtpGioKetThuc.Size = new System.Drawing.Size(340, 23);
+            this.dtpGioKetThuc.TabIndex = 11;
+            this.dtpGioKetThuc.Value = new System.DateTime(2026, 1, 11, 21, 50, 0, 0);
+            // 
             // FrmLichThi
             // 
             this.ClientSize = new System.Drawing.Size(984, 611);
@@ -399,6 +407,7 @@
             this.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.Name = "FrmLichThi";
             this.Text = "Quản Lý Lịch Thi";
+            this.Load += new System.EventHandler(this.FrmLichThi_Load);
             this.grpSearch.ResumeLayout(false);
             this.grpSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLichThi)).EndInit();
@@ -431,7 +440,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMaMH;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtGioBatDau;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtMaPhong;
         private System.Windows.Forms.Label label2;
@@ -439,12 +447,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpNgayThi;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtGioKetThuc;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.DateTimePicker dtpGioBatDau;
+        private System.Windows.Forms.DateTimePicker dtpGioKetThuc;
     }
 }

@@ -44,8 +44,8 @@ namespace QuanLyHocSinh.Forms
             cbKyThi.Text = "";
             txtMaMH.Text = "";
             dtpNgayThi.Value = DateTime.Now;
-            txtGioBatDau.Text = "";
-            txtGioKetThuc.Text = "";
+            dtpGioBatDau.Text = "";
+            dtpGioKetThuc.Text = "";
             txtMaPhong.Text = "";
             txtSearch.Text = "";
         }
@@ -64,8 +64,8 @@ namespace QuanLyHocSinh.Forms
                 if (DateTime.TryParse(row.Cells["colNgayThi"].Value?.ToString(), out DateTime d))
                     dtpNgayThi.Value = d;
 
-                txtGioBatDau.Text = row.Cells["colGioBatDau"].Value?.ToString();
-                txtGioKetThuc.Text = row.Cells["colGioKetThuc"].Value?.ToString();
+                dtpGioBatDau.Text = row.Cells["colGioBatDau"].Value?.ToString();
+                dtpGioKetThuc.Text = row.Cells["colGioKetThuc"].Value?.ToString();
                 txtMaPhong.Text = row.Cells["colMaPhong"].Value?.ToString();
             }
         }
@@ -87,8 +87,8 @@ namespace QuanLyHocSinh.Forms
                     cbKyThi.Text.Trim(),
                     txtMaMH.Text.Trim(),
                     dtpNgayThi.Value.ToString("yyyy-MM-dd"),
-                    txtGioBatDau.Text.Trim(),
-                    txtGioKetThuc.Text.Trim(),
+                    dtpGioBatDau.Text.Trim(),
+                    dtpGioKetThuc.Text.Trim(),
                     txtMaPhong.Text.Trim()
                 );
 
@@ -116,8 +116,8 @@ namespace QuanLyHocSinh.Forms
                     cbKyThi.Text.Trim(),
                     txtMaMH.Text.Trim(),
                     dtpNgayThi.Value.ToString("yyyy-MM-dd"),
-                    txtGioBatDau.Text.Trim(),
-                    txtGioKetThuc.Text.Trim(),
+                    dtpGioBatDau.Text.Trim(),
+                    dtpGioKetThuc.Text.Trim(),
                     txtMaPhong.Text.Trim(),
                     txtMaLT.Text
                 );
@@ -174,6 +174,36 @@ namespace QuanLyHocSinh.Forms
             txtSearch.Text = "";
             LoadData();
         }
+
+
+        
+        private bool CheckTrungLich(string ngayThi, string gioBD, string gioKT, string maPhong, string maLT_HienTai = null)
+        {
+            
+            string sql = string.Format(@"
+        SELECT COUNT(*) 
+        FROM LichThi 
+        WHERE NgayThi = '{0}' 
+          AND MaPhong = '{1}' 
+          AND ('{2}' < GioKetThuc AND '{3}' > GioBatDau)",
+                ngayThi, maPhong, gioBD, gioKT);
+
+            
+            if (!string.IsNullOrEmpty(maLT_HienTai))
+            {
+                sql += " AND MaLT != " + maLT_HienTai;
+            }
+
+           
+            DataTable dt = DatabaseHelper.GetData(sql);
+
+            if (dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0][0]) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
         #endregion
+
     }
 }
