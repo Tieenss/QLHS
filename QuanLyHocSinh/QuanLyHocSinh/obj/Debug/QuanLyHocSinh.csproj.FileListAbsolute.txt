@@ -208,3 +208,4 @@ D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Fo
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmToBoMon.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.zMainForm.Form1.resources
 D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmDangNhap.resources
+D:\SourceCode\QLHS_CSharp\QuanLyHocSinh\QuanLyHocSinh\obj\Debug\QuanLyHocSinh.Forms.FrmQuanLyHanhKiem.resources

@@ -14,19 +14,28 @@ namespace QuanLyHocSinh.Forms
 
         private void FrmQuanLyHanhKiem_Load(object sender, EventArgs e)
         {
-            LoadData();
-            // Cài đặt combo box nếu chưa có item
+            
+            cboLocHocKy.SelectedIndex = 0; 
+            txtLocNamHoc.Text = "2024-2025"; 
+
+            
             if (cboXepLoai.Items.Count == 0)
             {
                 cboXepLoai.Items.AddRange(new string[] { "Tốt", "Khá", "Trung Bình", "Yếu", "Chưa xếp loại" });
             }
+
+           
+            LoadData();
+
+            
+            dgvHanhKiem.ReadOnly = true;
         }
 
-        // --- LOAD DỮ LIỆU ---
+        
         private void LoadData(string whereClause = "")
         {
-            // SỬA: Dùng đúng tên cột XepLoai và NhanXet
-            string sql = @"SELECT hk.MaHS, hs.HoTen, hk.HocKy, hk.NamHoc, hk.XepLoai, hk.NhanXet 
+           
+            string sql = @"SELECT hk.MaHS, hs.HoTen, hk.NamHoc, hk.HocKy, hk.XepLoai, hk.NhanXet 
                            FROM HanhKiem hk
                            JOIN HocSinh hs ON hk.MaHS = hs.MaHS
                            WHERE 1=1 " + whereClause;
@@ -35,7 +44,44 @@ namespace QuanLyHocSinh.Forms
             dgvHanhKiem.DataSource = dt;
         }
 
-        // --- CLICK VÀO LƯỚI ---
+        private void btnLoc_Click(object sender, EventArgs e)
+        {
+            string condition = "";
+
+            
+            if (!string.IsNullOrEmpty(txtLocMaLop.Text))
+            {
+                condition += " AND hs.MaLop = '" + txtLocMaLop.Text.Trim() + "'";
+            }
+
+            if (!string.IsNullOrEmpty(txtLocNamHoc.Text))
+            {
+                condition += " AND hk.NamHoc = '" + txtLocNamHoc.Text.Trim() + "'";
+            }
+
+            if (!string.IsNullOrEmpty(cboLocHocKy.Text))
+            {
+                condition += " AND hk.HocKy = N'" + cboLocHocKy.Text + "'";
+            }
+
+            LoadData(condition);
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string keyword = txtTimKiem.Text.Trim();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                string condition = string.Format(" AND (hk.MaHS LIKE '%{0}%' OR hs.HoTen LIKE N'%{0}%')", keyword);
+                LoadData(condition);
+            }
+            else
+            {
+               
+                btnLoc_Click(null, null);
+            }
+        }
+
         private void dgvHanhKiem_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1 || e.RowIndex >= dgvHanhKiem.Rows.Count - 1) return;
@@ -44,105 +90,112 @@ namespace QuanLyHocSinh.Forms
             {
                 DataGridViewRow row = dgvHanhKiem.Rows[e.RowIndex];
 
-                txtMaHS.Text = GetString(row, "MaHS");
-                txtTenHS.Text = GetString(row, "HoTen");
-                txtNamHoc.Text = GetString(row, "NamHoc");
+                txtMaHS.Text = row.Cells["colMaHS"].Value?.ToString();
+                txtTenHS.Text = row.Cells["colHoTen"].Value?.ToString();
 
-                // SỬA: Lấy dữ liệu từ cột NhanXet và XepLoai
-                txtNhanXet.Text = GetString(row, "NhanXet");
+                string namHocRow = row.Cells["colNamHoc"].Value?.ToString();
+                string hocKyRow = row.Cells["colHocKy"].Value?.ToString();
 
-                string hocKy = GetString(row, "HocKy");
-                string xepLoai = GetString(row, "XepLoai");
-
-                if (!string.IsNullOrEmpty(hocKy)) cboHocKy.Text = hocKy;
-                if (!string.IsNullOrEmpty(xepLoai)) cboXepLoai.Text = xepLoai;
+                cboXepLoai.Text = row.Cells["colXepLoai"].Value?.ToString();
+                txtNhanXet.Text = row.Cells["colNhanXet"].Value?.ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi hiển thị: " + ex.Message);
+                MessageBox.Show("Lỗi chọn dòng: " + ex.Message);
             }
         }
 
-        private string GetString(DataGridViewRow row, string colName)
+        private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (row.Cells[colName].Value != null && row.Cells[colName].Value != DBNull.Value)
-                return row.Cells[colName].Value.ToString();
-            return "";
+            if (string.IsNullOrEmpty(txtMaHS.Text)) { MessageBox.Show("Vui lòng nhập hoặc chọn Mã HS"); return; }
+
+            string maHS = txtMaHS.Text;
+            string namHoc = txtLocNamHoc.Text; 
+            string hocKy = cboLocHocKy.Text;
+
+            if (string.IsNullOrEmpty(namHoc) || string.IsNullOrEmpty(hocKy))
+            {
+                MessageBox.Show("Vui lòng nhập Năm học và Học kỳ ở khung Lọc bên trên để xác định thời gian nhập.");
+                return;
+            }
+
+            try
+            {
+              
+                string checkSql = string.Format("SELECT COUNT(*) FROM HanhKiem WHERE MaHS='{0}' AND NamHoc='{1}' AND HocKy=N'{2}'", maHS, namHoc, hocKy);
+                DataTable dtCheck = DatabaseHelper.GetData(checkSql);
+
+                int count = 0;
+                if (dtCheck.Rows.Count > 0) count = Convert.ToInt32(dtCheck.Rows[0][0]);
+
+                string sql = "";
+                if (count > 0)
+                {
+                  
+                    sql = string.Format(@"UPDATE HanhKiem 
+                                          SET XepLoai = N'{0}', NhanXet = N'{1}'
+                                          WHERE MaHS = '{2}' AND NamHoc = '{3}' AND HocKy = N'{4}'",
+                                          cboXepLoai.Text, txtNhanXet.Text,
+                                          maHS, namHoc, hocKy);
+                    DatabaseHelper.ExecuteSql(sql);
+                    MessageBox.Show("Cập nhật thành công!");
+                }
+                else
+                {
+                    
+                    sql = string.Format(@"INSERT INTO HanhKiem (MaHS, NamHoc, HocKy, XepLoai, NhanXet) 
+                                          VALUES ('{0}', '{1}', N'{2}', N'{3}', N'{4}')",
+                                          maHS, namHoc, hocKy, cboXepLoai.Text, txtNhanXet.Text);
+                    DatabaseHelper.ExecuteSql(sql);
+                    MessageBox.Show("Thêm mới thành công!");
+                }
+
+                btnLoc_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi lưu dữ liệu: " + ex.Message);
+            }
         }
 
-        // --- THÊM ---
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMaHS.Text)) { MessageBox.Show("Vui lòng nhập Mã HS"); return; }
-
-            // SỬA: Insert vào cột XepLoai, NhanXet
-            string sql = string.Format(@"INSERT INTO HanhKiem (MaHS, HocKy, NamHoc, XepLoai, NhanXet) 
-                                         VALUES ('{0}', N'{1}', '{2}', N'{3}', N'{4}')",
-                                         txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text, cboXepLoai.Text, txtNhanXet.Text);
-
-            DatabaseHelper.ExecuteSql(sql);
-            LoadData();
-            ResetControls();
-        }
-
-        // --- SỬA ---
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMaHS.Text)) return;
-
-            // SỬA: Update cột XepLoai, NhanXet
-            string sql = string.Format(@"UPDATE HanhKiem 
-                                         SET XepLoai = N'{0}', NhanXet = N'{1}'
-                                         WHERE MaHS = '{2}' AND HocKy = N'{3}' AND NamHoc = '{4}'",
-                                         cboXepLoai.Text, txtNhanXet.Text,
-                                         txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text);
-
-            DatabaseHelper.ExecuteSql(sql);
-            MessageBox.Show("Cập nhật thành công!");
-            LoadData();
-        }
-
-        // --- XÓA ---
+  
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMaHS.Text)) return;
 
-            if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+         
+            string namHoc = txtLocNamHoc.Text;
+            string hocKy = cboLocHocKy.Text;
+
+            if (MessageBox.Show($"Bạn có chắc muốn xóa Hạnh kiểm của HS {txtMaHS.Text} trong HK{hocKy} - {namHoc}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string sql = string.Format("DELETE FROM HanhKiem WHERE MaHS = '{0}' AND HocKy = N'{1}' AND NamHoc = '{2}'",
-                                            txtMaHS.Text, cboHocKy.Text, txtNamHoc.Text);
+                string sql = string.Format("DELETE FROM HanhKiem WHERE MaHS = '{0}' AND NamHoc = '{1}' AND HocKy = N'{2}'",
+                                            txtMaHS.Text, namHoc, hocKy);
 
                 DatabaseHelper.ExecuteSql(sql);
-                LoadData();
-                ResetControls();
+                btnLoc_Click(null, null);
+                ResetInputs();
             }
-        }
-
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            string keyword = txtTimKiem.Text.Trim();
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                LoadData(string.Format(" AND (hk.MaHS LIKE '%{0}%' OR hs.HoTen LIKE N'%{0}%')", keyword));
-            }
-            else LoadData();
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            ResetControls();
-            LoadData();
+            ResetInputs();
+            txtLocMaLop.Clear();
+            LoadData(); 
         }
 
-        private void ResetControls()
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng xuất Excel đang phát triển!");
+        }
+
+        private void ResetInputs()
         {
             txtMaHS.Clear();
             txtTenHS.Clear();
-            txtNamHoc.Clear();
             txtNhanXet.Clear();
-            txtTimKiem.Clear();
             cboXepLoai.SelectedIndex = -1;
-            cboHocKy.SelectedIndex = -1;
         }
     }
 }

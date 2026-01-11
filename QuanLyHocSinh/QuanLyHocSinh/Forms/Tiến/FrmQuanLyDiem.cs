@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using QuanLyHocSinh.Database;
+using System.Globalization;
 
 namespace QuanLyHocSinh.Forms
 {
@@ -20,7 +21,7 @@ namespace QuanLyHocSinh.Forms
 
         private void LoadMonHoc()
         {
-            //cb môn học
+            //cbox môn học
             DataTable dt = DatabaseHelper.GetData("SELECT MaMH, TenMH FROM MonHoc");
             cbMonFilter.DataSource = dt;
             cbMonFilter.DisplayMember = "TenMH";
@@ -29,7 +30,7 @@ namespace QuanLyHocSinh.Forms
 
         private void LoadData(string whereClause = "")
         {
-            // JOIN bảng Diem và HocSinh để lấy Họ Tên
+            
             string query = @"SELECT d.MaHS, hs.HoTen, d.MaMH, d.HocKy, d.DiemMieng, d.Diem15p, d.Diem1Tiet, d.DiemThi, d.DiemTB 
                              FROM Diem d 
                              JOIN HocSinh hs ON d.MaHS = hs.MaHS 
@@ -40,7 +41,7 @@ namespace QuanLyHocSinh.Forms
             dgvDiem.DataSource = dt;
         }
 
-        
+        //fill dữ liệu lên phần nhập
         private void dgvDiem_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvDiem.SelectedCells.Count > 0)
@@ -48,13 +49,15 @@ namespace QuanLyHocSinh.Forms
                 DataGridViewRow row = dgvDiem.Rows[e.RowIndex];
 
                 
-                txtMaHS.Text = row.Cells["colMaHS"].Value?.ToString();
-                txtTenHS.Text = row.Cells["colHoTen"].Value?.ToString();
+                txtMaHS.Text = row.Cells["colMaHS"].Value.ToString();
+                txtTenHS.Text = row.Cells["colHoTen"].Value.ToString();
 
-                txtDiemMieng.Text = row.Cells["colDiemMieng"].Value?.ToString();
-                txtDiem15p.Text = row.Cells["colDiem15p"].Value?.ToString();
-                txtDiem1Tiet.Text = row.Cells["colDiem1Tiet"].Value?.ToString();
-                txtDiemThi.Text = row.Cells["colDiemThi"].Value?.ToString();
+                txtDiemMieng.Text = row.Cells["colDiemMieng"].Value.ToString();
+                txtDiem15p.Text = row.Cells["colDiem15p"].Value.ToString();
+                txtDiem1Tiet.Text = row.Cells["colDiem1Tiet"].Value.ToString();
+                txtDiemThi.Text = row.Cells["colDiemThi"].Value.ToString();
+                txtMonHoc.Text = row.Cells["colMaMH"].Value.ToString();
+                txtHocKy.Text = row.Cells["colHocKy"].Value.ToString();
             }
         }
 
@@ -62,20 +65,18 @@ namespace QuanLyHocSinh.Forms
         private void btnFilter_Click(object sender, EventArgs e)
         {
             string condition = "";
-
-            // Lọc theo lớp
-            if (!string.IsNullOrEmpty(txtLopFilter.Text))
+           if (!string.IsNullOrEmpty(txtLopFilter.Text))
             {
                 condition += " AND hs.MaLop = '" + txtLopFilter.Text.Trim() + "'";
             }
 
-            // Lọc theo Môn
+            
             if (cbMonFilter.SelectedValue != null)
             {
                 condition += " AND d.MaMH = '" + cbMonFilter.SelectedValue.ToString() + "'";
             }
 
-            // Lọc theo Học Kỳ
+           
             if (!string.IsNullOrEmpty(cbHocKyFilter.Text))
             {
                 condition += " AND d.HocKy = " + cbHocKyFilter.Text;
@@ -84,7 +85,7 @@ namespace QuanLyHocSinh.Forms
             LoadData(condition);
         }
 
-        // Nút Tìm Kiếm
+        
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
@@ -95,11 +96,11 @@ namespace QuanLyHocSinh.Forms
             }
             else
             {
-                LoadData(); // Load lại tất cả
+                LoadData(); 
             }
         }
 
-        // Nút Lưu / Cập nhật điểm
+       
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -110,57 +111,77 @@ namespace QuanLyHocSinh.Forms
                     return;
                 }
 
-                // Lấy giá trị điểm, nếu rỗng thì coi là 0
-                float diemMieng = string.IsNullOrEmpty(txtDiemMieng.Text) ? 0 : float.Parse(txtDiemMieng.Text);
-                float diem15p = string.IsNullOrEmpty(txtDiem15p.Text) ? 0 : float.Parse(txtDiem15p.Text);
-                float diem1Tiet = string.IsNullOrEmpty(txtDiem1Tiet.Text) ? 0 : float.Parse(txtDiem1Tiet.Text);
-                float diemThi = string.IsNullOrEmpty(txtDiemThi.Text) ? 0 : float.Parse(txtDiemThi.Text);
 
-                // Tính điểm TB: (Miệng + 15p + 1Tiết*2 + Thi*3) / 7
+                float diemMieng = GetValidScore(txtDiemMieng.Text, "Điểm Miệng");
+                float diem15p = GetValidScore(txtDiem15p.Text, "Điểm 15p");
+                float diem1Tiet = GetValidScore(txtDiem1Tiet.Text, "Điểm 1 Tiết");
+                float diemThi = GetValidScore(txtDiemThi.Text, "Điểm Thi");
+
+
                 float diemTB = (diemMieng + diem15p + diem1Tiet * 2 + diemThi * 3) / 7;
                 diemTB = (float)Math.Round(diemTB, 2);
 
-                // Lấy thông tin môn và học kỳ đang chọn ở trên bộ lọc để cập nhật
-                // (Giả sử đang nhập điểm cho môn và học kỳ đang lọc)
+                
                 string maMH = cbMonFilter.SelectedValue.ToString();
                 int hocKy = int.Parse(cbHocKyFilter.Text);
 
-                // SQL Update
-                // Lưu ý: Dùng dấu chấm (.) cho số thập phân trong SQL
+
                 string sql = string.Format(
-                    "UPDATE Diem SET DiemMieng={0}, Diem15p={1}, Diem1Tiet={2}, DiemThi={3}, DiemTB={4} " +
-                    "WHERE MaHS='{5}' AND MaMH='{6}' AND HocKy={7}",
-                    diemMieng.ToString().Replace(',', '.'),
-                    diem15p.ToString().Replace(',', '.'),
-                    diem1Tiet.ToString().Replace(',', '.'),
-                    diemThi.ToString().Replace(',', '.'),
-                    diemTB.ToString().Replace(',', '.'),
-                    txtMaHS.Text,
-                    maMH,
-                    hocKy
-                );
+            @"UPDATE Diem 
+              SET DiemMieng={0}, Diem15p={1}, Diem1Tiet={2}, DiemThi={3}, DiemTB={4} 
+              WHERE MaHS='{5}' AND MaMH='{6}' AND HocKy={7}",
+            diemMieng.ToString(CultureInfo.InvariantCulture),
+            diem15p.ToString(CultureInfo.InvariantCulture),
+            diem1Tiet.ToString(CultureInfo.InvariantCulture),
+            diemThi.ToString(CultureInfo.InvariantCulture),
+            diemTB.ToString(CultureInfo.InvariantCulture),
+            txtMaHS.Text, maMH, hocKy
+        );
 
                 DatabaseHelper.ExecuteSql(sql);
                 MessageBox.Show("Cập nhật thành công! Điểm TB mới: " + diemTB);
 
-                // Refresh lại lưới
+                
                 btnFilter_Click(null, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi cập nhật: " + ex.Message);
+                MessageBox.Show(ex.Message, "Lỗi Nhập Liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            // Chức năng này sẽ code sau khi bạn thêm thư viện Excel (ví dụ EPPlus)
+            
             MessageBox.Show("Chức năng xuất Excel đang phát triển!");
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private float GetValidScore(string input, string tenTruong)
         {
+            if (string.IsNullOrEmpty(input)) return 0; 
 
+            
+            if (input.Contains("."))
+            {
+                throw new Exception($"Lỗi tại ô '{tenTruong}': Vui lòng dùng dấu phẩy (,) để nhập số thập phân. Không dùng dấu chấm!");
+            }
+
+           
+            CultureInfo vietNamParams = new CultureInfo("vi-VN");
+
+            if (float.TryParse(input, NumberStyles.Any, vietNamParams, out float ketQua))
+            {
+               
+                if (ketQua < 0 || ketQua > 10)
+                {
+                    throw new Exception($"Điểm '{tenTruong}' không hợp lệ (Phải từ 0 - 10).");
+                }
+                return ketQua;
+            }
+            else
+            {
+                throw new Exception($"Dữ liệu tại '{tenTruong}' không phải là số hợp lệ.");
+            }
         }
     }
 }

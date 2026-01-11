@@ -53,6 +53,10 @@
             this.txtMaHS = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.lbMonHoc = new System.Windows.Forms.Label();
+            this.txtMonHoc = new System.Windows.Forms.TextBox();
+            this.txtHocKy = new System.Windows.Forms.TextBox();
+            this.lbHocKy = new System.Windows.Forms.Label();
             this.grpFilter.SuspendLayout();
             this.grpSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).BeginInit();
@@ -190,11 +194,11 @@
             this.label4.Size = new System.Drawing.Size(147, 16);
             this.label4.TabIndex = 0;
             this.label4.Text = "Nhập Tên hoặc Mã HS:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // dgvDiem
             // 
             this.dgvDiem.AllowUserToAddRows = false;
+            this.dgvDiem.AllowUserToDeleteRows = false;
             this.dgvDiem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -210,6 +214,7 @@
             this.colDiemTB});
             this.dgvDiem.Location = new System.Drawing.Point(12, 175);
             this.dgvDiem.Name = "dgvDiem";
+            this.dgvDiem.ReadOnly = true;
             this.dgvDiem.RowHeadersWidth = 51;
             this.dgvDiem.RowTemplate.Height = 24;
             this.dgvDiem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -222,6 +227,7 @@
             this.colMaHS.DataPropertyName = "MaHS";
             this.colMaHS.HeaderText = "Mã HS";
             this.colMaHS.Name = "colMaHS";
+            this.colMaHS.ReadOnly = true;
             this.colMaHS.Width = 80;
             // 
             // colHoTen
@@ -229,6 +235,7 @@
             this.colHoTen.DataPropertyName = "HoTen";
             this.colHoTen.HeaderText = "Họ Tên";
             this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
             this.colHoTen.Width = 150;
             // 
             // colMaMH
@@ -236,6 +243,7 @@
             this.colMaMH.DataPropertyName = "MaMH";
             this.colMaMH.HeaderText = "Môn";
             this.colMaMH.Name = "colMaMH";
+            this.colMaMH.ReadOnly = true;
             this.colMaMH.Width = 80;
             // 
             // colHocKy
@@ -243,6 +251,7 @@
             this.colHocKy.DataPropertyName = "HocKy";
             this.colHocKy.HeaderText = "HK";
             this.colHocKy.Name = "colHocKy";
+            this.colHocKy.ReadOnly = true;
             this.colHocKy.Width = 50;
             // 
             // colDiemMieng
@@ -250,24 +259,28 @@
             this.colDiemMieng.DataPropertyName = "DiemMieng";
             this.colDiemMieng.HeaderText = "Điểm Miệng";
             this.colDiemMieng.Name = "colDiemMieng";
+            this.colDiemMieng.ReadOnly = true;
             // 
             // colDiem15p
             // 
             this.colDiem15p.DataPropertyName = "Diem15p";
             this.colDiem15p.HeaderText = "15 Phút";
             this.colDiem15p.Name = "colDiem15p";
+            this.colDiem15p.ReadOnly = true;
             // 
             // colDiem1Tiet
             // 
             this.colDiem1Tiet.DataPropertyName = "Diem1Tiet";
             this.colDiem1Tiet.HeaderText = "1 Tiết";
             this.colDiem1Tiet.Name = "colDiem1Tiet";
+            this.colDiem1Tiet.ReadOnly = true;
             // 
             // colDiemThi
             // 
             this.colDiemThi.DataPropertyName = "DiemThi";
             this.colDiemThi.HeaderText = "Điểm Thi";
             this.colDiemThi.Name = "colDiemThi";
+            this.colDiemThi.ReadOnly = true;
             // 
             // colDiemTB
             // 
@@ -275,9 +288,14 @@
             this.colDiemTB.DataPropertyName = "DiemTB";
             this.colDiemTB.HeaderText = "Trung Bình";
             this.colDiemTB.Name = "colDiemTB";
+            this.colDiemTB.ReadOnly = true;
             // 
             // grpUpdate
             // 
+            this.grpUpdate.Controls.Add(this.txtHocKy);
+            this.grpUpdate.Controls.Add(this.lbHocKy);
+            this.grpUpdate.Controls.Add(this.txtMonHoc);
+            this.grpUpdate.Controls.Add(this.lbMonHoc);
             this.grpUpdate.Controls.Add(this.btnExport);
             this.grpUpdate.Controls.Add(this.btnSave);
             this.grpUpdate.Controls.Add(this.txtDiemThi);
@@ -428,6 +446,40 @@
             this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 5;
             // 
+            // lbMonHoc
+            // 
+            this.lbMonHoc.AutoSize = true;
+            this.lbMonHoc.Location = new System.Drawing.Point(717, 20);
+            this.lbMonHoc.Name = "lbMonHoc";
+            this.lbMonHoc.Size = new System.Drawing.Size(67, 16);
+            this.lbMonHoc.TabIndex = 14;
+            this.lbMonHoc.Text = "Môn Học: ";
+            // 
+            // txtMonHoc
+            // 
+            this.txtMonHoc.Location = new System.Drawing.Point(796, 17);
+            this.txtMonHoc.Name = "txtMonHoc";
+            this.txtMonHoc.ReadOnly = true;
+            this.txtMonHoc.Size = new System.Drawing.Size(80, 22);
+            this.txtMonHoc.TabIndex = 15;
+            // 
+            // txtHocKy
+            // 
+            this.txtHocKy.Location = new System.Drawing.Point(796, 45);
+            this.txtHocKy.Name = "txtHocKy";
+            this.txtHocKy.ReadOnly = true;
+            this.txtHocKy.Size = new System.Drawing.Size(80, 22);
+            this.txtHocKy.TabIndex = 17;
+            // 
+            // lbHocKy
+            // 
+            this.lbHocKy.AutoSize = true;
+            this.lbHocKy.Location = new System.Drawing.Point(717, 48);
+            this.lbHocKy.Name = "lbHocKy";
+            this.lbHocKy.Size = new System.Drawing.Size(56, 16);
+            this.lbHocKy.TabIndex = 16;
+            this.lbHocKy.Text = "Học Kỳ: ";
+            // 
             // FrmQuanLyDiem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -496,5 +548,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDiem1Tiet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDiemThi;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDiemTB;
+        private System.Windows.Forms.TextBox txtMonHoc;
+        private System.Windows.Forms.Label lbMonHoc;
+        private System.Windows.Forms.TextBox txtHocKy;
+        private System.Windows.Forms.Label lbHocKy;
     }
 }

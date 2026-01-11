@@ -167,6 +167,24 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Database\ExcelHelper.cs" />
+    <Compile Include="Forms\Ha Trang\FrmQuanlyHocphi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ha Trang\FrmQuanlyHocphi.Designer.cs">
+      <DependentUpon>FrmQuanlyHocphi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ha Trang\FrmQuanlyPhuckhao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ha Trang\FrmQuanlyPhuckhao.Designer.cs">
+      <DependentUpon>FrmQuanlyPhuckhao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ha Trang\FrmQuanlyThongbao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ha Trang\FrmQuanlyThongbao.Designer.cs">
+      <DependentUpon>FrmQuanlyThongbao.cs</DependentUpon>
+    </Compile>
     <Compile Include="zMainForm\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,24 +208,6 @@
     </Compile>
     <Compile Include="Forms\Đại\frmQlytaikhoan.Designer.cs">
       <DependentUpon>frmQlytaikhoan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyHocphi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyHocphi.Designer.cs">
-      <DependentUpon>FrmQuanlyHocphi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyPhuckhao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyPhuckhao.Designer.cs">
-      <DependentUpon>FrmQuanlyPhuckhao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyThongbao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Ha Trang\FrmQuanlyThongbao.Designer.cs">
-      <DependentUpon>FrmQuanlyThongbao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Tiến\FrmLichThi.cs">
       <SubType>Form</SubType>
@@ -271,6 +271,18 @@
     <Compile Include="zMainForm\FrmDangNhap.Designer.cs">
       <DependentUpon>FrmDangNhap.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyHocphi.resx">
+      <DependentUpon>FrmQuanlyHocphi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyPhuckhao.resx">
+      <DependentUpon>FrmQuanlyPhuckhao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyThongbao.resx">
+      <DependentUpon>FrmQuanlyThongbao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tiến\FrmQuanLyHanhKiem.resx">
+      <DependentUpon>FrmQuanLyHanhKiem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="zMainForm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,15 +294,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Đại\frmQlytaikhoan.resx">
       <DependentUpon>frmQlytaikhoan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyHocphi.resx">
-      <DependentUpon>FrmQuanlyHocphi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyPhuckhao.resx">
-      <DependentUpon>FrmQuanlyPhuckhao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Ha Trang\FrmQuanlyThongbao.resx">
-      <DependentUpon>FrmQuanlyThongbao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tiến\FrmLichThi.resx">
       <DependentUpon>FrmLichThi.cs</DependentUpon>

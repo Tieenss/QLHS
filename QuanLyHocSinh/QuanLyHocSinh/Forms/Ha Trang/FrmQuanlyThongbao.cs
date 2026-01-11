@@ -100,34 +100,50 @@ namespace BaiKTcuoiky
 
         public void SetInterface(string status)
         {
-            // Vô hiệu hóa/Kích hoạt các ô nhập liệu
-            bool isEditing = (status == "Add" || status == "Edit");
-
-            txtMaTB.Enabled = false;
-
-            txtTieude.Enabled = isEditing;
-            txtNguoigui.Enabled = isEditing;
-            txtNoidung.Enabled = isEditing;
-
-            btnThem.Enabled = !isEditing;
-            btnSua.Enabled = !isEditing;
-            btnXoa.Enabled = !isEditing;
-            btnLuu.Enabled = isEditing;
-            btnCancel.Enabled = true;
-
-            if (status == "Add")
+            if(status == "Reset")
             {
-                ClearFields();
-                txtMaTB.Focus();
-            }
-        }
+                txtMaTB.Enabled = false;
+                txtTieude.Enabled = false;
+                txtNoidung.Enabled = false;
+                txtNguoigui.Enabled = false;
 
-        private void ClearFields()
-        {
-            txtMaTB.Clear();
-            txtTieude.Clear();
-            txtNoidung.Clear();
-            txtNguoigui.Clear();
+                btnThem.Enabled = true;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                btnLuu.Enabled = false;
+                btnCancel.Enabled = true;
+            }
+            else if(status == "Add")
+            {
+                txtMaTB.Enabled = false;
+                txtTieude.Enabled = true;
+                txtNoidung.Enabled = true;
+                txtNguoigui.Enabled = true;
+
+                txtMaTB.Text = "";
+                txtTieude.Text = "";
+                txtNoidung.Text = "";
+                txtNguoigui.Text = "";
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+            else if(status == "Edit")
+            {
+                txtMaTB.Enabled = false;
+                txtTieude.Enabled = true;
+                txtNoidung.Enabled = true;
+                txtNguoigui.Enabled = true;
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled = true;
+            }
         }
 
         #endregion

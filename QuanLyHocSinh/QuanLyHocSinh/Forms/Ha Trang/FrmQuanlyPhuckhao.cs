@@ -16,6 +16,7 @@ namespace BaiKTcuoiky
         #region
         string connectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;" +
             "TrustServerCertificate = True; Trusted_Connection = True";
+        DataSet ds = new DataSet();
         string Status = "Reset";
         #endregion
 
@@ -93,38 +94,57 @@ namespace BaiKTcuoiky
         {
             txtMhs.Text = row["MaHS"].ToString();
             cboTrangThai.Text = row["TrangThai"].ToString();
-            txtMaMH.Text = row["MaMH"].ToString();
+            cboMaMH.Text = row["MaMH"].ToString();
             txtLydo.Text = row["LyDo"].ToString();
         }
 
         public void SetInterface(string status)
         {
-            // Vô hiệu hóa/Kích hoạt các ô nhập liệu
-            bool isEditing = (status == "Add" || status == "Edit");
-
-            txtMhs.Enabled = isEditing;
-            cboTrangThai.Enabled = isEditing;   
-            txtMaMH.Enabled = isEditing;
-            txtLydo.Enabled = isEditing;
-
-            btnThem.Enabled = !isEditing;
-            btnSua.Enabled = !isEditing;
-            btnXoa.Enabled = !isEditing;
-            btnLuu.Enabled = isEditing;
-            btnCancel.Enabled = true;
-
-            if (status == "Add")
+            if (status == "Reset")
             {
-                ClearFields();
-                txtMhs.Focus();
-            }
-        }
+                cboMaMH.Enabled = false;
+                txtLydo.Enabled = false;
+                txtMhs.Enabled = false;
+                cboTrangThai.Enabled = false;
 
-        private void ClearFields()
-        {
-            txtMhs.Clear();
-            txtMaMH.Clear();
-            txtLydo.Clear();
+                btnThem.Enabled = true;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                btnLuu.Enabled = false;
+                btnCancel.Enabled = true;
+            }
+            else if (status == "Add")
+            {
+                cboMaMH.Enabled = true;
+                txtLydo.Enabled = true;
+                txtMhs.Enabled = true;
+                cboTrangThai.Enabled = true;
+
+                txtMhs.Text = "";
+                txtLydo.Text = "";
+                cboTrangThai.Text = "";
+                cboTrangThai.SelectedIndex = -1;
+                cboMaMH.SelectedIndex = -1;
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled=true;
+            }
+            else if(status == "Edit")
+            {
+                cboMaMH.Enabled = false;
+                txtLydo.Enabled = true;
+                txtMhs.Enabled = true;
+                cboTrangThai.Enabled = true;
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled = true;
+            }
         }
 
         #endregion
@@ -196,7 +216,7 @@ namespace BaiKTcuoiky
                     else return;
 
                     cmd.Parameters.AddWithValue("@MaHS", txtMhs.Text.Trim());
-                    cmd.Parameters.AddWithValue("@MaMH",txtMaMH.Text.Trim());
+                    cmd.Parameters.AddWithValue("@MaMH",cboMaMH.Text.Trim());
                     cmd.Parameters.AddWithValue("@LyDo",txtLydo.Text.Trim());
                     cmd.Parameters.AddWithValue("@TrangThai",cboTrangThai.Text.Trim());
                     cmd.ExecuteNonQuery();
@@ -227,7 +247,7 @@ namespace BaiKTcuoiky
             {
                 DataGridViewRow row = dgvPhuckhao.Rows[e.RowIndex];
                 txtMhs.Text = row.Cells["MaHS"].Value?.ToString() ?? "";
-                txtMaMH.Text = row.Cells["MaMH"].Value?.ToString() ?? "";
+                cboMaMH.Text = row.Cells["MaMH"].Value?.ToString() ?? "";
                 txtLydo.Text = row.Cells["LyDo"].Value?.ToString() ?? "";
                 cboTrangThai.Text = row.Cells["TrangThai"].Value?.ToString() ?? "";
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using QuanLyHocSinh.Database; // Sử dụng DatabaseHelper cũ
+using QuanLyHocSinh.Database; 
 
 namespace QuanLyHocSinh.Forms
 {
@@ -9,8 +9,8 @@ namespace QuanLyHocSinh.Forms
         public FrmDangNhap()
         {
             InitializeComponent();
-            txtMatKhau.PasswordChar = '*'; // Ẩn mật khẩu
-            this.StartPosition = FormStartPosition.CenterScreen; // Hiện giữa màn hình
+            txtMatKhau.PasswordChar = '*'; 
+            this.StartPosition = FormStartPosition.CenterScreen; 
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -24,7 +24,7 @@ namespace QuanLyHocSinh.Forms
             if (dt.Rows.Count > 0)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo");
-                this.DialogResult = DialogResult.OK; // Báo về MainForm là OK
+                this.DialogResult = DialogResult.OK; 
                 this.Close();
             }
             else

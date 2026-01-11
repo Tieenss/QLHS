@@ -16,7 +16,7 @@ namespace BaiKTcuoiky
     {
         #region
         string connectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog=QuanLyHocSinh;" +
-            "TrustServerCertificate = True; Trusted_Connection = True";
+             "TrustServerCertificate = True; Trusted_Connection = True";
         DataSet ds = new DataSet();
         string Status = "Reset";
         #endregion
@@ -103,36 +103,60 @@ namespace BaiKTcuoiky
 
         public void SetInterface(string status)
         {
-            // Vô hiệu hóa/Kích hoạt các ô nhập liệu
-            bool isEditing = (status == "Add" || status == "Edit");
-
-            txtMaHP.Enabled = false;
-            txtMhs.Enabled = isEditing;
-            cboTrangthai.Enabled = isEditing;
-            txtTongtien.Enabled = isEditing;
-            txtMiengiam.Enabled = isEditing;
-            txtPhaidong.Enabled = false; // Phải đóng thường là ô tính toán tự động
-
-            btnThem.Enabled = !isEditing;
-            btnSua.Enabled = !isEditing;
-            btnXoa.Enabled = !isEditing;
-            btnLuu.Enabled = isEditing;
-            btnCancel.Enabled = true;
-
-            if (status == "Add")
+            if (Status == "Reset")
             {
-                ClearFields();
-                txtMhs.Focus();
-            }
-        }
+                txtMaHP.Enabled = false;
+                txtMhs.Enabled = false;
+                cboTrangthai.Enabled = false;
+                txtTongtien.Enabled = false;
+                txtMiengiam.Enabled = false;
+                txtPhaidong.Enabled = false;
 
-        private void ClearFields()
-        {
-            txtMaHP.Clear();
-            txtMhs.Clear();
-            txtTongtien.Clear();
-            txtMiengiam.Clear();
-            txtPhaidong.Clear();
+                btnThem.Enabled = true;
+                btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                btnLuu.Enabled = false;
+                btnCancel.Enabled = true;
+            }
+            else if (Status == "Add")
+            {
+                txtMaHP.Enabled = false; 
+                txtMhs.Enabled = true;
+                cboTrangthai.Enabled = true;
+                txtTongtien.Enabled = true;
+                txtMiengiam.Enabled = true;
+                txtPhaidong.Enabled = false;
+
+                txtMaHP.Text = "";
+                txtMhs.Text = "";
+                cboTrangthai.SelectedIndex = -1; // rỗng
+                txtTongtien.Text = "0";
+                txtMiengiam.Text = "0";
+                txtPhaidong.Text = "0";
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled = true;
+
+                txtMhs.Focus(); // Đưa chuột vào ô Mã học sinh để nhập luôn
+            }
+            else if (Status == "Edit")
+            {
+                txtMaHP.Enabled = false;
+                txtMhs.Enabled = true;
+                cboTrangthai.Enabled = true;
+                txtTongtien.Enabled = true;
+                txtMiengiam.Enabled = true;
+                txtPhaidong.Enabled = false;
+
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnLuu.Enabled = true;
+                btnCancel.Enabled = true;
+            }
         }
 
         #endregion
@@ -164,7 +188,6 @@ namespace BaiKTcuoiky
             }
             Status = "Edit";
             SetInterface(Status);
-            //txtMhs.Enabled = false; // Không cho sửa Mã học sinh (Khóa chính)
         }
 
         // Tự động tính số tiền phải đóng khi nhập Tổng tiền hoặc Miễn giảm

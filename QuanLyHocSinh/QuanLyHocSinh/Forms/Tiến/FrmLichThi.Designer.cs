@@ -115,6 +115,8 @@
             // 
             // dgvLichThi
             // 
+            this.dgvLichThi.AllowUserToAddRows = false;
+            this.dgvLichThi.AllowUserToDeleteRows = false;
             this.dgvLichThi.ColumnHeadersHeight = 30;
             this.dgvLichThi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaLT,
@@ -126,6 +128,7 @@
             this.colMaPhong});
             this.dgvLichThi.Location = new System.Drawing.Point(12, 120);
             this.dgvLichThi.Name = "dgvLichThi";
+            this.dgvLichThi.ReadOnly = true;
             this.dgvLichThi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLichThi.Size = new System.Drawing.Size(960, 280);
             this.dgvLichThi.TabIndex = 2;
@@ -136,6 +139,7 @@
             this.colMaLT.DataPropertyName = "MaLT";
             this.colMaLT.HeaderText = "Mã LT";
             this.colMaLT.Name = "colMaLT";
+            this.colMaLT.ReadOnly = true;
             this.colMaLT.Width = 70;
             // 
             // colTenKyThi
@@ -143,6 +147,7 @@
             this.colTenKyThi.DataPropertyName = "TenKyThi";
             this.colTenKyThi.HeaderText = "Kỳ Thi";
             this.colTenKyThi.Name = "colTenKyThi";
+            this.colTenKyThi.ReadOnly = true;
             this.colTenKyThi.Width = 150;
             // 
             // colMaMH
@@ -150,12 +155,14 @@
             this.colMaMH.DataPropertyName = "MaMH";
             this.colMaMH.HeaderText = "Mã Môn";
             this.colMaMH.Name = "colMaMH";
+            this.colMaMH.ReadOnly = true;
             // 
             // colNgayThi
             // 
             this.colNgayThi.DataPropertyName = "NgayThi";
             this.colNgayThi.HeaderText = "Ngày Thi";
             this.colNgayThi.Name = "colNgayThi";
+            this.colNgayThi.ReadOnly = true;
             this.colNgayThi.Width = 150;
             // 
             // colGioBatDau
@@ -163,12 +170,14 @@
             this.colGioBatDau.DataPropertyName = "GioBatDau";
             this.colGioBatDau.HeaderText = "Bắt Đầu";
             this.colGioBatDau.Name = "colGioBatDau";
+            this.colGioBatDau.ReadOnly = true;
             // 
             // colGioKetThuc
             // 
             this.colGioKetThuc.DataPropertyName = "GioKetThuc";
             this.colGioKetThuc.HeaderText = "Kết Thúc";
             this.colGioKetThuc.Name = "colGioKetThuc";
+            this.colGioKetThuc.ReadOnly = true;
             // 
             // colMaPhong
             // 
@@ -176,6 +185,7 @@
             this.colMaPhong.DataPropertyName = "MaPhong";
             this.colMaPhong.HeaderText = "Phòng";
             this.colMaPhong.Name = "colMaPhong";
+            this.colMaPhong.ReadOnly = true;
             // 
             // grpDetail
             // 

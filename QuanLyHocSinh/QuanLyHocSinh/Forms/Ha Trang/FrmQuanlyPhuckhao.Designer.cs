@@ -30,7 +30,6 @@
         {
             this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.txtLydo = new System.Windows.Forms.TextBox();
-            this.txtMaMH = new System.Windows.Forms.TextBox();
             this.txtMhs = new System.Windows.Forms.TextBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,12 +47,13 @@
             this.btnThem = new System.Windows.Forms.Button();
             this.labelTieude = new System.Windows.Forms.Label();
             this.grbThongtin = new System.Windows.Forms.GroupBox();
+            this.cboTrangThai = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.grbDanhsachPK = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.grbTimkiem = new System.Windows.Forms.GroupBox();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.cboTrangThai = new System.Windows.Forms.ComboBox();
+            this.cboMaMH = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhuckhao)).BeginInit();
             this.grbThongtin.SuspendLayout();
             this.grbDanhsachPK.SuspendLayout();
@@ -75,16 +75,9 @@
             this.txtLydo.Size = new System.Drawing.Size(250, 90);
             this.txtLydo.TabIndex = 8;
             // 
-            // txtMaMH
-            // 
-            this.txtMaMH.Location = new System.Drawing.Point(270, 64);
-            this.txtMaMH.Name = "txtMaMH";
-            this.txtMaMH.Size = new System.Drawing.Size(144, 26);
-            this.txtMaMH.TabIndex = 6;
-            // 
             // txtMhs
             // 
-            this.txtMhs.Location = new System.Drawing.Point(270, 32);
+            this.txtMhs.Location = new System.Drawing.Point(270, 29);
             this.txtMhs.Name = "txtMhs";
             this.txtMhs.Size = new System.Drawing.Size(144, 26);
             this.txtMhs.TabIndex = 5;
@@ -129,7 +122,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(149, 67);
+            this.label3.Location = new System.Drawing.Point(149, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 1;
@@ -238,9 +231,9 @@
             // 
             // grbThongtin
             // 
+            this.grbThongtin.Controls.Add(this.cboMaMH);
             this.grbThongtin.Controls.Add(this.cboTrangThai);
             this.grbThongtin.Controls.Add(this.txtLydo);
-            this.grbThongtin.Controls.Add(this.txtMaMH);
             this.grbThongtin.Controls.Add(this.txtMhs);
             this.grbThongtin.Controls.Add(this.label6);
             this.grbThongtin.Controls.Add(this.label5);
@@ -253,10 +246,21 @@
             this.grbThongtin.TabStop = false;
             this.grbThongtin.Text = "Thông tin chi tiết";
             // 
+            // cboTrangThai
+            // 
+            this.cboTrangThai.FormattingEnabled = true;
+            this.cboTrangThai.Items.AddRange(new object[] {
+            "Chờ xử lý",
+            "Đã xử lý"});
+            this.cboTrangThai.Location = new System.Drawing.Point(270, 96);
+            this.cboTrangThai.Name = "cboTrangThai";
+            this.cboTrangThai.Size = new System.Drawing.Size(144, 28);
+            this.cboTrangThai.TabIndex = 9;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(149, 35);
+            this.label2.Location = new System.Drawing.Point(149, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 20);
             this.label2.TabIndex = 0;
@@ -293,16 +297,25 @@
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
-            // cboTrangThai
+            // cboMaMH
             // 
-            this.cboTrangThai.FormattingEnabled = true;
-            this.cboTrangThai.Items.AddRange(new object[] {
-            "Chờ xử lý",
-            "Đã xử lý"});
-            this.cboTrangThai.Location = new System.Drawing.Point(270, 96);
-            this.cboTrangThai.Name = "cboTrangThai";
-            this.cboTrangThai.Size = new System.Drawing.Size(144, 28);
-            this.cboTrangThai.TabIndex = 9;
+            this.cboMaMH.FormattingEnabled = true;
+            this.cboMaMH.Items.AddRange(new object[] {
+            "TOAN",
+            "LY",
+            "HOA",
+            "SINH",
+            "VAN",
+            "SU",
+            "DIA",
+            "ANH",
+            "GDCD",
+            "TIN",
+            "THEDUC"});
+            this.cboMaMH.Location = new System.Drawing.Point(270, 61);
+            this.cboMaMH.Name = "cboMaMH";
+            this.cboMaMH.Size = new System.Drawing.Size(144, 28);
+            this.cboMaMH.TabIndex = 10;
             // 
             // FrmQuanlyPhuckhao
             // 
@@ -337,7 +350,6 @@
 
         private System.Windows.Forms.TextBox txtTimkiem;
         private System.Windows.Forms.TextBox txtLydo;
-        private System.Windows.Forms.TextBox txtMaMH;
         private System.Windows.Forms.TextBox txtMhs;
         private System.Windows.Forms.Button btnTimkiem;
         private System.Windows.Forms.Label label7;
@@ -361,5 +373,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
         private System.Windows.Forms.DataGridViewTextBoxColumn LyDo;
         private System.Windows.Forms.ComboBox cboTrangThai;
+        private System.Windows.Forms.ComboBox cboMaMH;
     }
 }

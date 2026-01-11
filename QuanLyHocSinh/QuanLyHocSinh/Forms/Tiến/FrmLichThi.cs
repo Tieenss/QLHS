@@ -20,7 +20,7 @@ namespace QuanLyHocSinh.Forms
             LoadData(); 
         }
 
-        // --- HÀM DÙNG CHUNG ---
+        
         private void LoadData(string condition = "")
         {
             string query = "SELECT * FROM LichThi";
@@ -50,7 +50,7 @@ namespace QuanLyHocSinh.Forms
             txtSearch.Text = "";
         }
 
-        // --- SỰ KIỆN CLICK GRID ---
+        
         private void dgvLichThi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvLichThi.SelectedCells.Count > 0)
@@ -70,14 +70,12 @@ namespace QuanLyHocSinh.Forms
             }
         }
 
-        // --- CÁC NÚT CHỨC NĂNG ---
-
-        // 1. Thêm Mới
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate đơn giản
+                
                 if (string.IsNullOrEmpty(txtMaMH.Text) || string.IsNullOrEmpty(cbKyThi.Text))
                 {
                     MessageBox.Show("Vui lòng nhập Mã Môn và Kỳ Thi!");
@@ -102,7 +100,7 @@ namespace QuanLyHocSinh.Forms
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
 
-        // 2. Cập Nhật (Sửa)
+  
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -131,7 +129,7 @@ namespace QuanLyHocSinh.Forms
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
 
-        // 3. Xóa
+      
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -153,19 +151,19 @@ namespace QuanLyHocSinh.Forms
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
 
-        // 4. Làm Mới (Reset)
+  
         private void btnReset_Click(object sender, EventArgs e)
         {
             ClearInputs();
         }
 
-        // 5. Tìm Kiếm
+ 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string key = txtSearch.Text.Trim();
             if (!string.IsNullOrEmpty(key))
             {
-                // Tìm theo Tên Kỳ Thi hoặc Mã Môn
+             
                 string condition = string.Format("TenKyThi LIKE N'%{0}%' OR MaMH LIKE '%{0}%'", key);
                 LoadData(condition);
             }
