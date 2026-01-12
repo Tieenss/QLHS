@@ -19,6 +19,7 @@ namespace QuanLyHocSinh.Database
             Excel.Application excelApp = null;
             Excel.Workbook workbook = null;
             Excel.Worksheet worksheet = null;
+            bool userOpened = false;
 
             try
             {
@@ -83,7 +84,8 @@ namespace QuanLyHocSinh.Database
                     if (MessageBox.Show("Bạn có muốn mở file vừa xuất không?", "Hỏi", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         excelApp.Visible = true; 
-                        return; 
+                        
+                        userOpened = true;
                     }
                 }
             }
@@ -93,9 +95,15 @@ namespace QuanLyHocSinh.Database
             }
             finally
             {
-                
-                if (workbook != null) workbook.Close(false);
-                if (excelApp != null && !excelApp.Visible) excelApp.Quit();
+                if (workbook != null && !userOpened)
+                {
+                    workbook.Close(false);
+                }
+
+                if (excelApp != null && !userOpened)
+                {
+                    excelApp.Quit();
+                }
 
                 releaseObject(worksheet);
                 releaseObject(workbook);

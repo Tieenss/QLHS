@@ -75,8 +75,8 @@ namespace BaiKTcuoiky
                     da.Fill(dt);
 
                     dgvPhuckhao.AutoGenerateColumns = false;
-                    dgvPhuckhao.DataSource = null; // Xóa nguồn cũ
-                    dgvPhuckhao.DataSource = dt;   // Gán nguồn mới
+                    dgvPhuckhao.DataSource = null;
+                    dgvPhuckhao.DataSource = dt;   
 
                     if (dt.Rows.Count > 0)
                     {

@@ -38,6 +38,10 @@
             this.colDiemThi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDiemTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpUpdate = new System.Windows.Forms.GroupBox();
+            this.txtHocKy = new System.Windows.Forms.TextBox();
+            this.lbHocKy = new System.Windows.Forms.Label();
+            this.txtMonHoc = new System.Windows.Forms.TextBox();
+            this.lbMonHoc = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtDiemThi = new System.Windows.Forms.TextBox();
@@ -53,10 +57,6 @@
             this.txtMaHS = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.lbMonHoc = new System.Windows.Forms.Label();
-            this.txtMonHoc = new System.Windows.Forms.TextBox();
-            this.txtHocKy = new System.Windows.Forms.TextBox();
-            this.lbHocKy = new System.Windows.Forms.Label();
             this.grpFilter.SuspendLayout();
             this.grpSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).BeginInit();
@@ -317,6 +317,40 @@
             this.grpUpdate.TabStop = false;
             this.grpUpdate.Text = "Cập nhật điểm";
             // 
+            // txtHocKy
+            // 
+            this.txtHocKy.Location = new System.Drawing.Point(796, 45);
+            this.txtHocKy.Name = "txtHocKy";
+            this.txtHocKy.ReadOnly = true;
+            this.txtHocKy.Size = new System.Drawing.Size(80, 22);
+            this.txtHocKy.TabIndex = 17;
+            // 
+            // lbHocKy
+            // 
+            this.lbHocKy.AutoSize = true;
+            this.lbHocKy.Location = new System.Drawing.Point(717, 48);
+            this.lbHocKy.Name = "lbHocKy";
+            this.lbHocKy.Size = new System.Drawing.Size(56, 16);
+            this.lbHocKy.TabIndex = 16;
+            this.lbHocKy.Text = "Học Kỳ: ";
+            // 
+            // txtMonHoc
+            // 
+            this.txtMonHoc.Location = new System.Drawing.Point(796, 17);
+            this.txtMonHoc.Name = "txtMonHoc";
+            this.txtMonHoc.ReadOnly = true;
+            this.txtMonHoc.Size = new System.Drawing.Size(80, 22);
+            this.txtMonHoc.TabIndex = 15;
+            // 
+            // lbMonHoc
+            // 
+            this.lbMonHoc.AutoSize = true;
+            this.lbMonHoc.Location = new System.Drawing.Point(717, 20);
+            this.lbMonHoc.Name = "lbMonHoc";
+            this.lbMonHoc.Size = new System.Drawing.Size(67, 16);
+            this.lbMonHoc.TabIndex = 14;
+            this.lbMonHoc.Text = "Môn Học: ";
+            // 
             // btnExport
             // 
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -327,7 +361,7 @@
             this.btnExport.TabIndex = 13;
             this.btnExport.Text = "Xuất Excel";
             this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnExport.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnSave
             // 
@@ -445,40 +479,6 @@
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(0, 16);
             this.lblTotal.TabIndex = 5;
-            // 
-            // lbMonHoc
-            // 
-            this.lbMonHoc.AutoSize = true;
-            this.lbMonHoc.Location = new System.Drawing.Point(717, 20);
-            this.lbMonHoc.Name = "lbMonHoc";
-            this.lbMonHoc.Size = new System.Drawing.Size(67, 16);
-            this.lbMonHoc.TabIndex = 14;
-            this.lbMonHoc.Text = "Môn Học: ";
-            // 
-            // txtMonHoc
-            // 
-            this.txtMonHoc.Location = new System.Drawing.Point(796, 17);
-            this.txtMonHoc.Name = "txtMonHoc";
-            this.txtMonHoc.ReadOnly = true;
-            this.txtMonHoc.Size = new System.Drawing.Size(80, 22);
-            this.txtMonHoc.TabIndex = 15;
-            // 
-            // txtHocKy
-            // 
-            this.txtHocKy.Location = new System.Drawing.Point(796, 45);
-            this.txtHocKy.Name = "txtHocKy";
-            this.txtHocKy.ReadOnly = true;
-            this.txtHocKy.Size = new System.Drawing.Size(80, 22);
-            this.txtHocKy.TabIndex = 17;
-            // 
-            // lbHocKy
-            // 
-            this.lbHocKy.AutoSize = true;
-            this.lbHocKy.Location = new System.Drawing.Point(717, 48);
-            this.lbHocKy.Name = "lbHocKy";
-            this.lbHocKy.Size = new System.Drawing.Size(56, 16);
-            this.lbHocKy.TabIndex = 16;
-            this.lbHocKy.Text = "Học Kỳ: ";
             // 
             // FrmQuanLyDiem
             // 

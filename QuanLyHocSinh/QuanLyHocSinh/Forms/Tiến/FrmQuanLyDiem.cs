@@ -41,7 +41,6 @@ namespace QuanLyHocSinh.Forms
             dgvDiem.DataSource = dt;
         }
 
-        //fill dữ liệu lên phần nhập
         private void dgvDiem_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvDiem.SelectedCells.Count > 0)
@@ -155,6 +154,11 @@ namespace QuanLyHocSinh.Forms
             
             MessageBox.Show("Chức năng xuất Excel đang phát triển!");
         }
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+
+            ExcelHelper.ExportToExcel(dgvDiem, "QuanLyDiem");
+        }
 
         private float GetValidScore(string input, string tenTruong)
         {
@@ -183,5 +187,8 @@ namespace QuanLyHocSinh.Forms
                 throw new Exception($"Dữ liệu tại '{tenTruong}' không phải là số hợp lệ.");
             }
         }
+
+        
     }
+
 }

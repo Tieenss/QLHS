@@ -75,8 +75,8 @@ namespace BaiKTcuoiky
                     da.Fill(dt);
 
                     dgvThongbao.AutoGenerateColumns = false;
-                    dgvThongbao.DataSource = null; // Xóa nguồn cũ
-                    dgvThongbao.DataSource = dt;   // Gán nguồn mới
+                    dgvThongbao.DataSource = null;
+                    dgvThongbao.DataSource = dt;   
 
                     if (dt.Rows.Count > 0)
                     {
@@ -208,7 +208,7 @@ namespace BaiKTcuoiky
                             @"INSERT INTO ThongBao (TieuDe, NguoiGui, NoiDung) 
                             VALUES (@TieuDe, @NguoiGui, @NoiDung)", conn);
                     }
-                    else // Edit
+                    else 
                     {
                         cmd = new SqlCommand(
                             @"UPDATE ThongBao SET TieuDe=@TieuDe, NguoiGui=@NguoiGui, NoiDung=@NoiDung 

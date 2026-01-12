@@ -28,6 +28,12 @@
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.lblTimKiem = new System.Windows.Forms.Label();
             this.dgvHanhKiem = new System.Windows.Forms.DataGridView();
+            this.colMaHS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNamHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colXepLoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNhanXet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCapNhat = new System.Windows.Forms.GroupBox();
             this.btnXuatExcel = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
@@ -41,12 +47,6 @@
             this.lblTenHS = new System.Windows.Forms.Label();
             this.txtMaHS = new System.Windows.Forms.TextBox();
             this.lblMaHS = new System.Windows.Forms.Label();
-            this.colMaHS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNamHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colXepLoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNhanXet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpLoc.SuspendLayout();
             this.grpTimKiem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHanhKiem)).BeginInit();
@@ -76,9 +76,9 @@
             this.grpLoc.Controls.Add(this.txtLocMaLop);
             this.grpLoc.Controls.Add(this.lblLocMaLop);
             this.grpLoc.Location = new System.Drawing.Point(9, 43);
-            this.grpLoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpLoc.Margin = new System.Windows.Forms.Padding(2);
             this.grpLoc.Name = "grpLoc";
-            this.grpLoc.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpLoc.Padding = new System.Windows.Forms.Padding(2);
             this.grpLoc.Size = new System.Drawing.Size(720, 57);
             this.grpLoc.TabIndex = 1;
             this.grpLoc.TabStop = false;
@@ -87,7 +87,7 @@
             // btnLoc
             // 
             this.btnLoc.Location = new System.Drawing.Point(615, 20);
-            this.btnLoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoc.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoc.Name = "btnLoc";
             this.btnLoc.Size = new System.Drawing.Size(90, 24);
             this.btnLoc.TabIndex = 6;
@@ -102,7 +102,7 @@
             "1",
             "2"});
             this.cboLocHocKy.Location = new System.Drawing.Point(502, 24);
-            this.cboLocHocKy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboLocHocKy.Margin = new System.Windows.Forms.Padding(2);
             this.cboLocHocKy.Name = "cboLocHocKy";
             this.cboLocHocKy.Size = new System.Drawing.Size(61, 21);
             this.cboLocHocKy.TabIndex = 5;
@@ -120,7 +120,7 @@
             // txtLocNamHoc
             // 
             this.txtLocNamHoc.Location = new System.Drawing.Point(338, 24);
-            this.txtLocNamHoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLocNamHoc.Margin = new System.Windows.Forms.Padding(2);
             this.txtLocNamHoc.Name = "txtLocNamHoc";
             this.txtLocNamHoc.Size = new System.Drawing.Size(91, 20);
             this.txtLocNamHoc.TabIndex = 3;
@@ -138,7 +138,7 @@
             // txtLocMaLop
             // 
             this.txtLocMaLop.Location = new System.Drawing.Point(172, 24);
-            this.txtLocMaLop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLocMaLop.Margin = new System.Windows.Forms.Padding(2);
             this.txtLocMaLop.Name = "txtLocMaLop";
             this.txtLocMaLop.Size = new System.Drawing.Size(91, 20);
             this.txtLocMaLop.TabIndex = 1;
@@ -159,9 +159,9 @@
             this.grpTimKiem.Controls.Add(this.txtTimKiem);
             this.grpTimKiem.Controls.Add(this.lblTimKiem);
             this.grpTimKiem.Location = new System.Drawing.Point(9, 105);
-            this.grpTimKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpTimKiem.Margin = new System.Windows.Forms.Padding(2);
             this.grpTimKiem.Name = "grpTimKiem";
-            this.grpTimKiem.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpTimKiem.Padding = new System.Windows.Forms.Padding(2);
             this.grpTimKiem.Size = new System.Drawing.Size(720, 49);
             this.grpTimKiem.TabIndex = 2;
             this.grpTimKiem.TabStop = false;
@@ -172,7 +172,7 @@
             this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.ForeColor = System.Drawing.Color.DarkOrange;
             this.btnTimKiem.Location = new System.Drawing.Point(465, 16);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(75, 24);
             this.btnTimKiem.TabIndex = 2;
@@ -183,7 +183,7 @@
             // txtTimKiem
             // 
             this.txtTimKiem.Location = new System.Drawing.Point(232, 20);
-            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(2);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(211, 20);
             this.txtTimKiem.TabIndex = 1;
@@ -211,7 +211,7 @@
             this.colXepLoai,
             this.colNhanXet});
             this.dgvHanhKiem.Location = new System.Drawing.Point(9, 158);
-            this.dgvHanhKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvHanhKiem.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHanhKiem.Name = "dgvHanhKiem";
             this.dgvHanhKiem.ReadOnly = true;
             this.dgvHanhKiem.RowHeadersWidth = 51;
@@ -220,6 +220,58 @@
             this.dgvHanhKiem.Size = new System.Drawing.Size(720, 203);
             this.dgvHanhKiem.TabIndex = 3;
             this.dgvHanhKiem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHanhKiem_CellClick);
+            // 
+            // colMaHS
+            // 
+            this.colMaHS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colMaHS.DataPropertyName = "MaHS";
+            this.colMaHS.HeaderText = "Mã HS";
+            this.colMaHS.Name = "colMaHS";
+            this.colMaHS.ReadOnly = true;
+            this.colMaHS.Width = 65;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colHoTen.DataPropertyName = "HoTen";
+            this.colHoTen.HeaderText = "Tên HS";
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.ReadOnly = true;
+            // 
+            // colNamHoc
+            // 
+            this.colNamHoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colNamHoc.DataPropertyName = "NamHoc";
+            this.colNamHoc.HeaderText = "Năm Học";
+            this.colNamHoc.Name = "colNamHoc";
+            this.colNamHoc.ReadOnly = true;
+            this.colNamHoc.Width = 77;
+            // 
+            // colHocKy
+            // 
+            this.colHocKy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colHocKy.DataPropertyName = "HocKy";
+            this.colHocKy.HeaderText = "Học Kỳ";
+            this.colHocKy.Name = "colHocKy";
+            this.colHocKy.ReadOnly = true;
+            this.colHocKy.Width = 67;
+            // 
+            // colXepLoai
+            // 
+            this.colXepLoai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colXepLoai.DataPropertyName = "XepLoai";
+            this.colXepLoai.HeaderText = "Xếp Loại";
+            this.colXepLoai.Name = "colXepLoai";
+            this.colXepLoai.ReadOnly = true;
+            this.colXepLoai.Width = 74;
+            // 
+            // colNhanXet
+            // 
+            this.colNhanXet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNhanXet.DataPropertyName = "NhanXet";
+            this.colNhanXet.HeaderText = "Nhận Xét";
+            this.colNhanXet.Name = "colNhanXet";
+            this.colNhanXet.ReadOnly = true;
             // 
             // grpCapNhat
             // 
@@ -236,9 +288,9 @@
             this.grpCapNhat.Controls.Add(this.txtMaHS);
             this.grpCapNhat.Controls.Add(this.lblMaHS);
             this.grpCapNhat.Location = new System.Drawing.Point(9, 366);
-            this.grpCapNhat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpCapNhat.Margin = new System.Windows.Forms.Padding(2);
             this.grpCapNhat.Name = "grpCapNhat";
-            this.grpCapNhat.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpCapNhat.Padding = new System.Windows.Forms.Padding(2);
             this.grpCapNhat.Size = new System.Drawing.Size(720, 114);
             this.grpCapNhat.TabIndex = 4;
             this.grpCapNhat.TabStop = false;
@@ -248,18 +300,18 @@
             // 
             this.btnXuatExcel.ForeColor = System.Drawing.Color.Green;
             this.btnXuatExcel.Location = new System.Drawing.Point(202, 77);
-            this.btnXuatExcel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnXuatExcel.Margin = new System.Windows.Forms.Padding(2);
             this.btnXuatExcel.Name = "btnXuatExcel";
             this.btnXuatExcel.Size = new System.Drawing.Size(82, 28);
             this.btnXuatExcel.TabIndex = 11;
             this.btnXuatExcel.Text = "Xuất Excel";
             this.btnXuatExcel.UseVisualStyleBackColor = true;
-            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
+            this.btnXuatExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.Location = new System.Drawing.Point(472, 77);
-            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(2);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(82, 28);
             this.btnLamMoi.TabIndex = 10;
@@ -270,7 +322,7 @@
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(390, 77);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(2);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(75, 28);
             this.btnXoa.TabIndex = 9;
@@ -282,7 +334,7 @@
             // 
             this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuu.Location = new System.Drawing.Point(292, 77);
-            this.btnLuu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLuu.Margin = new System.Windows.Forms.Padding(2);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(90, 28);
             this.btnLuu.TabIndex = 8;
@@ -293,7 +345,7 @@
             // txtNhanXet
             // 
             this.txtNhanXet.Location = new System.Drawing.Point(390, 46);
-            this.txtNhanXet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNhanXet.Margin = new System.Windows.Forms.Padding(2);
             this.txtNhanXet.Name = "txtNhanXet";
             this.txtNhanXet.Size = new System.Drawing.Size(188, 20);
             this.txtNhanXet.TabIndex = 7;
@@ -318,7 +370,7 @@
             "Yếu",
             "Chưa xếp loại"});
             this.cboXepLoai.Location = new System.Drawing.Point(262, 46);
-            this.cboXepLoai.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboXepLoai.Margin = new System.Windows.Forms.Padding(2);
             this.cboXepLoai.Name = "cboXepLoai";
             this.cboXepLoai.Size = new System.Drawing.Size(61, 21);
             this.cboXepLoai.TabIndex = 5;
@@ -336,7 +388,7 @@
             // txtTenHS
             // 
             this.txtTenHS.Location = new System.Drawing.Point(390, 19);
-            this.txtTenHS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTenHS.Margin = new System.Windows.Forms.Padding(2);
             this.txtTenHS.Name = "txtTenHS";
             this.txtTenHS.ReadOnly = true;
             this.txtTenHS.Size = new System.Drawing.Size(188, 20);
@@ -355,7 +407,7 @@
             // txtMaHS
             // 
             this.txtMaHS.Location = new System.Drawing.Point(262, 19);
-            this.txtMaHS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMaHS.Margin = new System.Windows.Forms.Padding(2);
             this.txtMaHS.Name = "txtMaHS";
             this.txtMaHS.Size = new System.Drawing.Size(61, 20);
             this.txtMaHS.TabIndex = 1;
@@ -370,52 +422,6 @@
             this.lblMaHS.TabIndex = 0;
             this.lblMaHS.Text = "Mã HS:";
             // 
-            // colMaHS
-            // 
-            this.colMaHS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colMaHS.DataPropertyName = "MaHS";
-            this.colMaHS.HeaderText = "Mã HS";
-            this.colMaHS.Name = "colMaHS";
-            this.colMaHS.Width = 65;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colHoTen.DataPropertyName = "HoTen";
-            this.colHoTen.HeaderText = "Tên HS";
-            this.colHoTen.Name = "colHoTen";
-            // 
-            // colNamHoc
-            // 
-            this.colNamHoc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colNamHoc.DataPropertyName = "NamHoc";
-            this.colNamHoc.HeaderText = "Năm Học";
-            this.colNamHoc.Name = "colNamHoc";
-            this.colNamHoc.Width = 77;
-            // 
-            // colHocKy
-            // 
-            this.colHocKy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colHocKy.DataPropertyName = "HocKy";
-            this.colHocKy.HeaderText = "Học Kỳ";
-            this.colHocKy.Name = "colHocKy";
-            this.colHocKy.Width = 67;
-            // 
-            // colXepLoai
-            // 
-            this.colXepLoai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colXepLoai.DataPropertyName = "XepLoai";
-            this.colXepLoai.HeaderText = "Xếp Loại";
-            this.colXepLoai.Name = "colXepLoai";
-            this.colXepLoai.Width = 74;
-            // 
-            // colNhanXet
-            // 
-            this.colNhanXet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNhanXet.DataPropertyName = "NhanXet";
-            this.colNhanXet.HeaderText = "Nhận Xét";
-            this.colNhanXet.Name = "colNhanXet";
-            // 
             // FrmQuanLyHanhKiem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,7 +432,7 @@
             this.Controls.Add(this.grpTimKiem);
             this.Controls.Add(this.grpLoc);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmQuanLyHanhKiem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Hạnh Kiểm";

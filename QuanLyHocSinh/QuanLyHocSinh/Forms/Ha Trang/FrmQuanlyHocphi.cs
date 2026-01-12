@@ -27,21 +27,16 @@ namespace BaiKTcuoiky
            
             dgvHocphi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 1. Tiêu đề: Luôn nằm giữa phía trên và dãn theo chiều ngang
             labelTieude.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
 
-            // 2. Vùng Tìm kiếm: Bám trên và dãn ngang (để ô tìm kiếm dài ra khi phóng to)
             grbTimkiem.Anchor = AnchorStyles.Top | AnchorStyles.Bottom ;
             btnTimkiem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
-            // 3. Bảng dữ liệu: Dãn ra cả 4 hướng để chiếm trọn phần giữa Form
             grbDanhsachHP.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvHocphi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
-            // 4. Vùng Thông tin chi tiết: Luôn bám sát đáy và dãn ngang
             grbThongtin.Anchor = AnchorStyles.Bottom ;
 
-            // 5. Căn giữa các nút bấm: 
             btnThem.Anchor = AnchorStyles.Bottom;
             btnSua.Anchor = AnchorStyles.Bottom;
             btnXoa.Anchor = AnchorStyles.Bottom;
@@ -76,9 +71,8 @@ namespace BaiKTcuoiky
                     da.Fill(dt);
 
                     dgvHocphi.AutoGenerateColumns = false;
-                    dgvHocphi.DataSource = null; // Xóa nguồn cũ
-                    dgvHocphi.DataSource = dt;   // Gán nguồn mới
-
+                    dgvHocphi.DataSource = null; 
+                    dgvHocphi.DataSource = dt;   
                     if (dt.Rows.Count > 0)
                     {
                         DisplayData(dt.Rows[0]);
@@ -129,7 +123,7 @@ namespace BaiKTcuoiky
 
                 txtMaHP.Text = "";
                 txtMhs.Text = "";
-                cboTrangthai.SelectedIndex = -1; // rỗng
+                cboTrangthai.SelectedIndex = -1;
                 txtTongtien.Text = "0";
                 txtMiengiam.Text = "0";
                 txtPhaidong.Text = "0";
@@ -140,7 +134,7 @@ namespace BaiKTcuoiky
                 btnLuu.Enabled = true;
                 btnCancel.Enabled = true;
 
-                txtMhs.Focus(); // Đưa chuột vào ô Mã học sinh để nhập luôn
+                txtMhs.Focus();
             }
             else if (Status == "Edit")
             {
@@ -190,7 +184,6 @@ namespace BaiKTcuoiky
             SetInterface(Status);
         }
 
-        // Tự động tính số tiền phải đóng khi nhập Tổng tiền hoặc Miễn giảm
         private void txtCalculate_TextChanged(object sender, EventArgs e)
         {
             try
@@ -201,7 +194,7 @@ namespace BaiKTcuoiky
             }
             catch
             {
-                // Tránh lỗi khi người dùng nhập chữ vào ô số
+                
             }
         }
 
@@ -267,7 +260,6 @@ namespace BaiKTcuoiky
                     }
                     else return;
 
-                    // Gán tham số
                     cmd.Parameters.AddWithValue("@MaHP", txtMaHP.Text.Trim());
                     cmd.Parameters.AddWithValue("@MaHS", txtMhs.Text.Trim());
                     cmd.Parameters.AddWithValue("@TrangThai", cboTrangthai.Text.Trim());

@@ -197,5 +197,11 @@ namespace QuanLyHocSinh.Forms
             txtNhanXet.Clear();
             cboXepLoai.SelectedIndex = -1;
         }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            
+            ExcelHelper.ExportToExcel(dgvHanhKiem, "DanhSachHanhKiem");
+        }
     }
 }
