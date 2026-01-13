@@ -97,7 +97,7 @@ namespace qlhocsinh
                 btnXoa.Enabled = false;
                 btnLuu.Enabled = true;
                 btnHuy.Enabled = true;
-
+                txtMaLop.Focus();
                 enableTextBox(true);
                
                 btnTai.Enabled = false;

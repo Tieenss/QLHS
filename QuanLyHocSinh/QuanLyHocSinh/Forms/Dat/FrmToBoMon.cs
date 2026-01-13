@@ -85,6 +85,7 @@ namespace QuanLyHocSinh.Forms
                 btnSua.Enabled = false;
                 btnLuu.Enabled = true;
                 btnHuy.Enabled = true;
+                txtMaToHop.Focus();
 
                 ClearInterface();
 

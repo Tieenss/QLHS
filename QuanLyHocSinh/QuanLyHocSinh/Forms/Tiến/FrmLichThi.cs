@@ -7,14 +7,14 @@ namespace QuanLyHocSinh.Forms
 {
     public partial class FrmLichThi : Form
     {
-        #region Variables
+     
         public FrmLichThi()
         {
             InitializeComponent();
         }
-        #endregion
+  
 
-        #region Public functions
+       
         private void FrmLichThi_Load(object sender, EventArgs e)
         {
             LoadComboboxData(); 
@@ -39,9 +39,9 @@ namespace QuanLyHocSinh.Forms
 
                 
                 DataTable dtLop = DatabaseHelper.GetData("SELECT MaLop, TenLop FROM Lop");
-                cbMaLop.DataSource = dtLop;
-                cbMaLop.DisplayMember = "TenLop";
-                cbMaLop.ValueMember = "MaLop";
+                cbTenLop.DataSource = dtLop;
+                cbTenLop.DisplayMember = "TenLop";
+                cbTenLop.ValueMember = "MaLop";
 
                
                 DataTable dtGV = DatabaseHelper.GetData("SELECT MaGV, HoTen FROM GiaoVien");
@@ -67,42 +67,25 @@ namespace QuanLyHocSinh.Forms
 
         private void LoadData(string condition = "")
         {
-           
-            string query = @"
-                SELECT 
-                    lt.MaLT, 
-                    lt.TenKyThi, 
-                    lt.NgayThi, 
-                    lt.GioBatDau, 
-                    lt.GioKetThuc,
-                    mh.TenMH,      
-                    ph.TenPhong,   
-                    l.TenLop,      
-                    gv.HoTen AS TenGiamThi,
-                    
-                    lt.MaMH, lt.MaPhong, lt.MaLop, lt.MaGT
-                FROM LichThi lt
-                LEFT JOIN MonHoc mh ON lt.MaMH = mh.MaMH
-                LEFT JOIN PhongHoc ph ON lt.MaPhong = ph.MaPhong
-                LEFT JOIN Lop l ON lt.MaLop = l.MaLop
-                LEFT JOIN GiaoVien gv ON lt.MaGT = gv.MaGV";
 
-            if (!string.IsNullOrEmpty(condition))
-            {
-                query += " WHERE " + condition;
-            }
+            string query = @"SELECT lt.*, mh.TenMH, ph.TenPhong, l.TenLop, gv.HoTen AS TenGiamThi 
+                     FROM LichThi lt
+                     LEFT JOIN MonHoc mh ON lt.MaMH = mh.MaMH
+                     LEFT JOIN PhongHoc ph ON lt.MaPhong = ph.MaPhong
+                     LEFT JOIN Lop l ON lt.MaLop = l.MaLop
+                     LEFT JOIN GiaoVien gv ON lt.MaGT = gv.MaGV";
 
-            
+
+            query += string.IsNullOrEmpty(condition) ? "" : " WHERE " + condition;
             query += " ORDER BY lt.NgayThi DESC, lt.GioBatDau ASC";
 
             DataTable dt = DatabaseHelper.GetData(query);
-            dgvLichThi.AutoGenerateColumns = false;
             dgvLichThi.DataSource = dt;
-            lblTotal.Text = "Tổng số bản ghi: " + (dt != null ? dt.Rows.Count.ToString() : "0");
+            
         }
-        #endregion
+       
 
-        #region Event
+       
         private void ClearInputs()
         {
             txtMaLT.Text = "";
@@ -110,7 +93,7 @@ namespace QuanLyHocSinh.Forms
 
             cbMonHoc.SelectedIndex = -1;
             cbMaPhong.SelectedIndex = -1;
-            cbMaLop.SelectedIndex = -1;
+            cbTenLop.SelectedIndex = -1;
             cbGiamThi.SelectedIndex = -1;
 
             dtpNgayThi.Value = DateTime.Now;
@@ -124,47 +107,35 @@ namespace QuanLyHocSinh.Forms
 
         private void dgvLichThi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (e.RowIndex >= 0 && dgvLichThi.SelectedCells.Count > 0)
+            if (e.RowIndex < 0) return;
+
+            try
             {
-                try
+                DataGridViewRow row = dgvLichThi.Rows[e.RowIndex];
+
+                txtMaLT.Text = row.Cells["colMaLT"].Value?.ToString();
+                cbKyThi.Text = row.Cells["colTenKyThi"].Value?.ToString();
+
+                cbMonHoc.SelectedValue = row.Cells["colMaMH"].Value;
+                cbMaPhong.SelectedValue = row.Cells["colMaPhong"].Value;
+
+                cbTenLop.Text = row.Cells["colTenLop"].Value?.ToString();
+
+                cbGiamThi.Text = row.Cells["colGiamThi"].Value?.ToString();
+
+                if (row.Cells["colNgayThi"].Value != DBNull.Value)
                 {
-                   
-                    var rowView = dgvLichThi.Rows[e.RowIndex].DataBoundItem as System.Data.DataRowView;
-
-                    if (rowView == null) return;
-
-                    System.Data.DataRow row = rowView.Row;
-
-                    txtMaLT.Text = row["MaLT"].ToString();
-                    cbKyThi.Text = row["TenKyThi"].ToString();
-
-                    if (row.Table.Columns.Contains("MaMH"))
-                        cbMonHoc.SelectedValue = row["MaMH"];
-
-                    if (row.Table.Columns.Contains("MaPhong"))
-                        cbMaPhong.SelectedValue = row["MaPhong"];
-
-                    if (row.Table.Columns.Contains("MaLop"))
-                        cbMaLop.SelectedValue = row["MaLop"]; 
-
-                    if (row.Table.Columns.Contains("MaGT"))
-                        cbGiamThi.SelectedValue = row["MaGT"]; 
-
-                    if (row["NgayThi"] != DBNull.Value)
-                    {
-                        dtpNgayThi.Value = Convert.ToDateTime(row["NgayThi"]);
-                    }
-
-                    dtpGioBatDau.Text = row["GioBatDau"].ToString();
-                    dtpGioKetThuc.Text = row["GioKetThuc"].ToString();
+                    dtpNgayThi.Value = Convert.ToDateTime(row.Cells["colNgayThi"].Value);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi hiển thị dữ liệu: " + ex.Message);
-                }
+                dtpGioBatDau.Text = row.Cells["colGioBatDau"].Value?.ToString();
+                dtpGioKetThuc.Text = row.Cells["colGioKetThuc"].Value?.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hiển thị: " + ex.Message);
             }
         }
+
 
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -173,7 +144,7 @@ namespace QuanLyHocSinh.Forms
             {
 
                 if (cbMonHoc.SelectedValue == null || cbMaPhong.SelectedValue == null ||
-                    cbMaLop.SelectedValue == null || cbGiamThi.SelectedValue == null)
+                    cbTenLop.SelectedValue == null || cbGiamThi.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn đầy đủ Môn, Phòng, Lớp và Giám thị!");
                     return;
@@ -184,7 +155,7 @@ namespace QuanLyHocSinh.Forms
                 string gioKT = dtpGioKetThuc.Value.ToString("HH:mm");
                 string maMH = cbMonHoc.SelectedValue.ToString();
                 string maPhong = cbMaPhong.SelectedValue.ToString();
-                string maLop = cbMaLop.SelectedValue.ToString();
+                string maLop = cbTenLop.SelectedValue.ToString();
                 string maGT = cbGiamThi.SelectedValue.ToString();
 
                 if (string.Compare(gioKT, gioBD) <= 0)
@@ -227,11 +198,10 @@ namespace QuanLyHocSinh.Forms
                 string ngay = dtpNgayThi.Value.ToString("yyyy-MM-dd");
                 string gioBD = dtpGioBatDau.Value.ToString("HH:mm");
                 string gioKT = dtpGioKetThuc.Value.ToString("HH:mm");
-
-                
+                             
                 string maMH = cbMonHoc.SelectedValue.ToString();
                 string maPhong = cbMaPhong.SelectedValue.ToString();
-                string maLop = cbMaLop.SelectedValue.ToString();
+                string maLop = cbTenLop.SelectedValue.ToString();
                 string maGT = cbGiamThi.SelectedValue.ToString();
 
                 if (maMH == null || maPhong == null || maLop == null || maGT == null)
@@ -256,9 +226,7 @@ namespace QuanLyHocSinh.Forms
                     cbKyThi.Text, maMH, ngay, gioBD, gioKT, maPhong, maLop, maGT, maLT
                 );
 
-                DatabaseHelper.ExecuteSql(sql);
-                MessageBox.Show("Cập nhật thành công!");
-                LoadData();
+                
                 DatabaseHelper.ExecuteSql(sql);
                 MessageBox.Show("Cập nhật thành công!");
                 LoadData();
@@ -325,13 +293,11 @@ namespace QuanLyHocSinh.Forms
             DataTable dt = DatabaseHelper.GetData(sql);
             if (dt != null && dt.Rows.Count > 0)
             {
-                
                 return dt.Rows[0][0].ToString();
             }
             return "Lỗi kết nối cơ sở dữ liệu hoặc không có phản hồi!";
         }
-        #endregion
-
+      
         private void btnExcel_Click(object sender, EventArgs e)
         {
             ExcelHelper.ExportToExcel(dgvLichThi, "DanhSachLichThi");

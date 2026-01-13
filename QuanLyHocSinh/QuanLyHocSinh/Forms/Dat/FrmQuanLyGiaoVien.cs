@@ -116,6 +116,7 @@ namespace QuanLyHocSinh.Forms
                 btnXoa.Enabled = false;
                 btnLuu.Enabled = true;
                 btnHuy.Enabled = true;
+                txtMaGV.Focus();
 
                 loadcombobox();
                 ClearData(); 

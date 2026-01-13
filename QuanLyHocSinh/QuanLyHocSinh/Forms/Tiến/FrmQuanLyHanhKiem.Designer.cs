@@ -299,7 +299,7 @@
             // btnXuatExcel
             // 
             this.btnXuatExcel.ForeColor = System.Drawing.Color.Green;
-            this.btnXuatExcel.Location = new System.Drawing.Point(202, 77);
+            this.btnXuatExcel.Location = new System.Drawing.Point(151, 77);
             this.btnXuatExcel.Margin = new System.Windows.Forms.Padding(2);
             this.btnXuatExcel.Name = "btnXuatExcel";
             this.btnXuatExcel.Size = new System.Drawing.Size(82, 28);
@@ -333,10 +333,10 @@
             // btnLuu
             // 
             this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.Location = new System.Drawing.Point(292, 77);
+            this.btnLuu.Location = new System.Drawing.Point(246, 77);
             this.btnLuu.Margin = new System.Windows.Forms.Padding(2);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(90, 28);
+            this.btnLuu.Size = new System.Drawing.Size(131, 28);
             this.btnLuu.TabIndex = 8;
             this.btnLuu.Text = "Lưu / Cập Nhật";
             this.btnLuu.UseVisualStyleBackColor = true;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel; // Khai báo thư viện Excel
+using Excel = Microsoft.Office.Interop.Excel; 
 
 namespace QuanLyHocSinh.Database
 {
@@ -27,7 +27,7 @@ namespace QuanLyHocSinh.Database
                 excelApp = new Excel.Application();
                 workbook = excelApp.Workbooks.Add(Type.Missing);
                 worksheet = (Excel.Worksheet)workbook.Sheets[1];
-                worksheet.Name = "DuLieuXuat"; // Đặt tên sheet
+                worksheet.Name = "DuLieuXuat";
 
               
                 int colIndex = 1;
